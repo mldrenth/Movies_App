@@ -1,12 +1,58 @@
+import {React, useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
+import { getPopularMovies, getTopRatedMovies, getUpcomingMovies } from './services/MovieApiServices';
+import MovieList from './components/MovieList';
+
 
 export default function App() {
+
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+
+  useEffect(() => {
+    getPopularMovies().then((popularMovies) => {
+      setPopularMovies(popularMovies.results);
+    });
+    
+  },[])
+
+  useEffect(() => {
+    getTopRatedMovies().then((topRatedMovies) => {
+      setTopRatedMovies(topRatedMovies.results);
+    });
+    
+  },[])
+
+  useEffect(() => {
+    getUpcomingMovies().then((upcomingMovies) => {
+      setUpcomingMovies(upcomingMovies.results);
+    });
+    
+  },[])
+  
+  
+
   return (
-    <View style={styles.container}>
-      <Text>Movies App</Text>
+    <SafeAreaView style={styles.container}>
+    <ScrollView >  
+      <View >
+     <Text>Popular Movies</Text>
+      <MovieList movies={popularMovies} ></MovieList>
+      </View>
+      <View>
+      <Text>Top Rated Movies</Text>
+      <MovieList movies={topRatedMovies}></MovieList>
+      </View>
+      <View>
+      <Text> Upcoming Movies</Text>
+      <MovieList movies={upcomingMovies}></MovieList>
+      </View>
+      </ScrollView>
+    
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -16,5 +62,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+   
+  }
 });
+
+
+
