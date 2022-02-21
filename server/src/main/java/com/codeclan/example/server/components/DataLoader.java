@@ -28,7 +28,18 @@ public class DataLoader implements ApplicationRunner  {
         userRepository.save(user1);
 
         // List<Integer> genres = Arrays.asList(23, 43);
-        Movie movie1 = new Movie("imageVerticalUrl", "imageHorizontalUrl", "title", "genre", "overview", 8.5, "releaseDate", 8.6, 7, 634649, "video");
+        Movie movie1 = new Movie(
+                "imageVerticalUrl",
+                "imageHorizontalUrl",
+                "Spider-Man: No Way Home",
+                "Action",
+                "...Spider-Man.",
+                8.3,
+                "2021-12-15",
+                9805.303,
+                7,
+                634649,
+                "video");
         movieRepository.save(movie1);
     }
 
