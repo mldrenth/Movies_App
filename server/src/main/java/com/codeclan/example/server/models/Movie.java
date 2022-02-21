@@ -54,24 +54,24 @@ public class Movie {
             }
     )
     private List<User> usersFavourites;
-//
-//    @ManyToMany
-//    @JsonIgnoreProperties({"moviesWatchlist"})
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @JoinTable(
-//            name = "users_moviesWatchlist",
-//            joinColumns = { @JoinColumn (
-//                    name = "movie_id",
-//                    nullable = false,
-//                    updatable = false)
-//            },
-//            inverseJoinColumns = { @JoinColumn (
-//                    name = "user_id",
-//                    nullable = false,
-//                    updatable = false)
-//            }
-//    )
-//    private List<User> usersWatchlist;
+
+    @ManyToMany
+    @JsonIgnoreProperties({"moviesWatchlist"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "users_moviesWatchlist",
+            joinColumns = { @JoinColumn (
+                    name = "movie_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn (
+                    name = "user_id",
+                    nullable = false,
+                    updatable = false)
+            }
+    )
+    private List<User> usersWatchlist;
 
 
     public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, String genre, String overview, double averageRating, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
@@ -87,7 +87,7 @@ public class Movie {
         this.idFromApi = idFromApi;
         this.video = video;
         this.usersFavourites = new ArrayList<>();
-//        this.usersWatchlist = new ArrayList<>();
+        this.usersWatchlist = new ArrayList<>();
     }
 
     // POJO
@@ -197,4 +197,13 @@ public class Movie {
     public void setUsersFavourites(List<User> usersFavourites) {
         this.usersFavourites = usersFavourites;
     }
+
+    public List<User> getUsersWatchlist() {
+        return usersWatchlist;
+    }
+
+    public void setUsersWatchlist(List<User> usersWatchlist) {
+        this.usersWatchlist = usersWatchlist;
+    }
+
 }

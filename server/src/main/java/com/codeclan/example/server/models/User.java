@@ -39,23 +39,23 @@ public class User {
     )
     private List<Movie> moviesFavourites;
 
-//    @ManyToMany
-//    @JsonIgnoreProperties({"usersWatchlist"})
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @JoinTable(
-//            name = "users_moviesWatchlist",
-//            joinColumns = { @JoinColumn (
-//                    name = "user_id",
-//                    nullable = false,
-//                    updatable = false)
-//            },
-//            inverseJoinColumns = { @JoinColumn (
-//                    name = "movie_id",
-//                    nullable = false,
-//                    updatable = false)
-//            }
-//    )
-//    private List<Movie> moviesWatchlist;
+    @ManyToMany
+    @JsonIgnoreProperties({"usersWatchlist"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "users_moviesWatchlist",
+            joinColumns = { @JoinColumn (
+                    name = "user_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn (
+                    name = "movie_id",
+                    nullable = false,
+                    updatable = false)
+            }
+    )
+    private List<Movie> moviesWatchlist;
 
 
     // friends(List of Users)   // TODO
@@ -66,7 +66,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.moviesFavourites = new ArrayList<>();
-//        this.moviesWatchlist = new ArrayList<>();
+        this.moviesWatchlist = new ArrayList<>();
     }
 
     // POJO
@@ -112,13 +112,13 @@ public class User {
     public void setMoviesFavourites(List<Movie> moviesFavourites) {
         this.moviesFavourites = moviesFavourites;
     }
-//
-//    public List<Movie> getMoviesWatchlist() {
-//        return moviesWatchlist;
-//    }
-//
-//    public void setMoviesWatchlist(List<Movie> moviesWatchlist) {
-//        this.moviesWatchlist = moviesWatchlist;
-//    }
+
+    public List<Movie> getMoviesWatchlist() {
+        return moviesWatchlist;
+    }
+
+    public void setMoviesWatchlist(List<Movie> moviesWatchlist) {
+        this.moviesWatchlist = moviesWatchlist;
+    }
 
 }
