@@ -1,27 +1,84 @@
 package com.codeclan.example.server.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
+@Entity
+@Table(name = "movies")
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "imageVerticalUrl")
     private String imageVerticalUrl;
+    @Column(name = "imageHorizontalUrl")
     private String imageHorizontalUrl;
+    @Column(name = "title")
     private String title;
-    private List<Integer> genres;
+    @Column(name = "genres")
+    private String genre;
+    @Column(name = "overview")
     private String overview;
+    @Column(name = "averageRating")
     private double averageRating;
+    @Column(name = "releaseDate")
     private String releaseDate;
+    @Column(name = "popularity")
     private double popularity;
+    @Column(name = "userRating")
     private int userRating;
-    private Long idFromApi;
+    @Column(name = "idFromApi")
+    private int idFromApi;
+    @Column(name = "video")
     private String video;
 
-    public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, List<Integer> genres, String overview, double averageRating, String releaseDate, double popularity, int userRating, Long idFromApi, String video) {
+//    @ManyToMany
+//    @JsonIgnoreProperties({"moviesFavourites"})
+//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+//    @JoinTable(
+//            name = "users_moviesFavourites",
+//            joinColumns = { @JoinColumn (
+//                    name = "movie_id",
+//                    nullable = false,
+//                    updatable = false)
+//            },
+//            inverseJoinColumns = { @JoinColumn (
+//                    name = "user_id",
+//                    nullable = false,
+//                    updatable = false)
+//            }
+//    )
+//    private List<User> usersFavourites;
+//
+//    @ManyToMany
+//    @JsonIgnoreProperties({"moviesWatchlist"})
+//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+//    @JoinTable(
+//            name = "users_moviesWatchlist",
+//            joinColumns = { @JoinColumn (
+//                    name = "movie_id",
+//                    nullable = false,
+//                    updatable = false)
+//            },
+//            inverseJoinColumns = { @JoinColumn (
+//                    name = "user_id",
+//                    nullable = false,
+//                    updatable = false)
+//            }
+//    )
+//    private List<User> usersWatchlist;
+
+
+    public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, String genre, String overview, double averageRating, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
         this.imageVerticalUrl = imageVerticalUrl;
         this.imageHorizontalUrl = imageHorizontalUrl;
         this.title = title;
-        this.genres = genres;
+        this.genre = genre;
         this.overview = overview;
         this.averageRating = averageRating;
         this.releaseDate = releaseDate;
@@ -29,6 +86,8 @@ public class Movie {
         this.userRating = userRating;
         this.idFromApi = idFromApi;
         this.video = video;
+//        this.usersFavourites = new ArrayList<>();
+//        this.usersWatchlist = new ArrayList<>();
     }
 
     // POJO
@@ -67,12 +126,12 @@ public class Movie {
         this.title = title;
     }
 
-    public List<Integer> getGenres() {
-        return genres;
+    public String getGenres() {
+        return genre;
     }
 
-    public void setGenres(List<Integer> genres) {
-        this.genres = genres;
+    public void setGenres(String genre) {
+        this.genre = genre;
     }
 
     public String getOverview() {
@@ -115,11 +174,11 @@ public class Movie {
         this.userRating = userRating;
     }
 
-    public Long getIdFromApi() {
+    public int getIdFromApi() {
         return idFromApi;
     }
 
-    public void setIdFromApi(Long idFromApi) {
+    public void setIdFromApi(int idFromApi) {
         this.idFromApi = idFromApi;
     }
 
