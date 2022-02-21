@@ -21,23 +21,23 @@ public class User {
     @Column(name = "password")
     private String password;
 
-//    @ManyToMany
-//    @JsonIgnoreProperties({"usersFavourites"})
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @JoinTable(
-//            name = "users_moviesFavourites",
-//            joinColumns = { @JoinColumn (
-//                    name = "user_id",
-//                    nullable = false,
-//                    updatable = false)
-//            },
-//            inverseJoinColumns = { @JoinColumn (
-//                    name = "movie_id",
-//                    nullable = false,
-//                    updatable = false)
-//            }
-//    )
-//    private List<Movie> moviesFavourites;
+    @ManyToMany
+    @JsonIgnoreProperties({"usersFavourites"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "users_moviesFavourites",
+            joinColumns = { @JoinColumn (
+                    name = "user_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn (
+                    name = "movie_id",
+                    nullable = false,
+                    updatable = false)
+            }
+    )
+    private List<Movie> moviesFavourites;
 
 //    @ManyToMany
 //    @JsonIgnoreProperties({"usersWatchlist"})
@@ -65,7 +65,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-//        this.moviesFavourites = new ArrayList<>();
+        this.moviesFavourites = new ArrayList<>();
 //        this.moviesWatchlist = new ArrayList<>();
     }
 
@@ -105,13 +105,13 @@ public class User {
         this.password = password;
     }
 
-//    public List<Movie> getMoviesFavourites() {
-//        return moviesFavourites;
-//    }
-//
-//    public void setMoviesFavourites(List<Movie> moviesFavourites) {
-//        this.moviesFavourites = moviesFavourites;
-//    }
+    public List<Movie> getMoviesFavourites() {
+        return moviesFavourites;
+    }
+
+    public void setMoviesFavourites(List<Movie> moviesFavourites) {
+        this.moviesFavourites = moviesFavourites;
+    }
 //
 //    public List<Movie> getMoviesWatchlist() {
 //        return moviesWatchlist;

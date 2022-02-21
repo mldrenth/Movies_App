@@ -37,23 +37,23 @@ public class Movie {
     @Column(name = "video")
     private String video;
 
-//    @ManyToMany
-//    @JsonIgnoreProperties({"moviesFavourites"})
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @JoinTable(
-//            name = "users_moviesFavourites",
-//            joinColumns = { @JoinColumn (
-//                    name = "movie_id",
-//                    nullable = false,
-//                    updatable = false)
-//            },
-//            inverseJoinColumns = { @JoinColumn (
-//                    name = "user_id",
-//                    nullable = false,
-//                    updatable = false)
-//            }
-//    )
-//    private List<User> usersFavourites;
+    @ManyToMany
+    @JsonIgnoreProperties({"moviesFavourites"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "users_moviesFavourites",
+            joinColumns = { @JoinColumn (
+                    name = "movie_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn (
+                    name = "user_id",
+                    nullable = false,
+                    updatable = false)
+            }
+    )
+    private List<User> usersFavourites;
 //
 //    @ManyToMany
 //    @JsonIgnoreProperties({"moviesWatchlist"})
@@ -86,7 +86,7 @@ public class Movie {
         this.userRating = userRating;
         this.idFromApi = idFromApi;
         this.video = video;
-//        this.usersFavourites = new ArrayList<>();
+        this.usersFavourites = new ArrayList<>();
 //        this.usersWatchlist = new ArrayList<>();
     }
 
@@ -126,11 +126,11 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGenres() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenres(String genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
@@ -190,4 +190,11 @@ public class Movie {
         this.video = video;
     }
 
+    public List<User> getUsersFavourites() {
+        return usersFavourites;
+    }
+
+    public void setUsersFavourites(List<User> usersFavourites) {
+        this.usersFavourites = usersFavourites;
+    }
 }
