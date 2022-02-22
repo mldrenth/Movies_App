@@ -65,8 +65,8 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.moviesFavourites = new ArrayList<>();
-        this.moviesWatchlist = new ArrayList<>();
+        this.moviesFavourites = new ArrayList<Movie>();
+        this.moviesWatchlist = new ArrayList<Movie>();
     }
 
     // POJO
@@ -105,6 +105,8 @@ public class User {
         this.password = password;
     }
 
+    // addMovieToFavourites()
+
     public List<Movie> getMoviesFavourites() {
         return moviesFavourites;
     }
@@ -112,6 +114,8 @@ public class User {
     public void setMoviesFavourites(List<Movie> moviesFavourites) {
         this.moviesFavourites = moviesFavourites;
     }
+
+    // addMovieToWatchlist()
 
     public List<Movie> getMoviesWatchlist() {
         return moviesWatchlist;

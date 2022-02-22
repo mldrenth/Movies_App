@@ -104,8 +104,8 @@ public class Movie {
         this.userRating = userRating;
         this.idFromApi = idFromApi;
         this.video = video;
-        this.usersFavourites = new ArrayList<>();
-        this.usersWatchlist = new ArrayList<>();
+        this.usersFavourites = new ArrayList<User>();
+        this.usersWatchlist = new ArrayList<User>();
     }
 
     // POJO

@@ -10,25 +10,26 @@ import static org.junit.Assert.assertEquals;
 public class MovieTests {
 
     Movie movie1;
-
-    Genre action = new Genre(28, "Action");
-    Genre adventure = new Genre(12, "Adventure");
-    List<Genre> genres = Arrays.asList(action, adventure);
+    Genre action;
+    Genre adventure;
+    Genre science_fiction;
+    List<Genre> genres;
 
     @Before
     public void before() {
+
+        action = new Genre(28, "Action");
+        adventure = new Genre(12, "Adventure");
+        science_fiction = new Genre(878, "Science Fiction");
+        genres = Arrays.asList(action, adventure, science_fiction);
+
         movie1 = new Movie(
-                "imageVerticalUrl",
-                "imageHorizontalUrl",
-                "Spider-Man: No Way Home",
-                genres,
+                "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+                "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+                "Spider-Man: No Way Home", genres,
                 "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-                8.3,
-                "2021-12-15",
-                9805.303,
-                7,
-                634649,
-                "video");
+                8.3, "2021-12-15", 9805.303, 7,
+                634649, "Bh8NeyejykU");
     }
 
 
@@ -39,7 +40,7 @@ public class MovieTests {
 
     @Test
     public void hasGenres() {
-        assertEquals(2, movie1.getGenres().size());
+        assertEquals(3, movie1.getGenres().size());
     }
 
     @Test
