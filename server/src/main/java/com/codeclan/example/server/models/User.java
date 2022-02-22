@@ -65,8 +65,8 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.moviesFavourites = new ArrayList<>();
-        this.moviesWatchlist = new ArrayList<>();
+        this.moviesFavourites = new ArrayList<Movie>();
+        this.moviesWatchlist = new ArrayList<Movie>();
     }
 
     // POJO
@@ -105,12 +105,20 @@ public class User {
         this.password = password;
     }
 
+    public void addMovieToFavourites(Movie movie){
+        this.moviesFavourites.add(movie);
+    }
+
     public List<Movie> getMoviesFavourites() {
         return moviesFavourites;
     }
 
     public void setMoviesFavourites(List<Movie> moviesFavourites) {
         this.moviesFavourites = moviesFavourites;
+    }
+
+    public void addMovieToWatchlist(Movie movie) {
+        this.moviesWatchlist.add(movie);
     }
 
     public List<Movie> getMoviesWatchlist() {
