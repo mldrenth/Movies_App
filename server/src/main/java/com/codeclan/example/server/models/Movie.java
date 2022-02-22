@@ -2,7 +2,6 @@ package com.codeclan.example.server.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,26 @@ public class Movie {
     @Column(name = "title")
     private String title;
     @Column(name = "genres")
-    private String genre;
-    @Column(name = "overview")
+
+    @ManyToMany
+    @JsonIgnoreProperties({"movies"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "movies_genres",
+            joinColumns = { @JoinColumn (
+                    name = "movie_id",
+                    nullable = false,
+                    updatable = false)
+            },
+            inverseJoinColumns = { @JoinColumn (
+                    name = "genre_id",
+                    nullable = false,
+                    updatable = false)
+            }
+    )
+    private List<Genre> genres;
+
+    @Column(name = "overview", length=1000)
     private String overview;
     @Column(name = "averageRating")
     private double averageRating;
@@ -75,11 +92,11 @@ public class Movie {
     private List<User> usersWatchlist;
 
 
-    public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, String genre, String overview, double averageRating, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
+    public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, List<Genre> genres, String overview, double averageRating, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
         this.imageVerticalUrl = imageVerticalUrl;
         this.imageHorizontalUrl = imageHorizontalUrl;
         this.title = title;
-        this.genre = genre;
+        this.genres = genres;
         this.overview = overview;
         this.averageRating = averageRating;
         this.releaseDate = releaseDate;
@@ -127,12 +144,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGenre() {
-        return genre;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
     public String getOverview() {
