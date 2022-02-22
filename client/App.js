@@ -1,70 +1,38 @@
-import {React, useState, useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
-import { getPopularMovies, getTopRatedMovies, getUpcomingMovies } from './services/MovieApiServices';
-import MovieList from './components/MovieList';
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './screens/HomeScreen';
+import WatchlistScreen from './screens/WatchlistScreen';
+import FavouritesScreen from './screens/FavouritesScreen';
 
 
-export default function App() {
+// function HomeScreen() {
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <Text>Home!</Text>
+//     </View>
+//   );
+// }
 
-  const [popularMovies, setPopularMovies] = useState([]);
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-
-  useEffect(() => {
-    getPopularMovies().then((popularMovies) => {
-      setPopularMovies(popularMovies.results);
-    });
-    
-  },[])
-
-  useEffect(() => {
-    getTopRatedMovies().then((topRatedMovies) => {
-      setTopRatedMovies(topRatedMovies.results);
-    });
-    
-  },[])
-
-  useEffect(() => {
-    getUpcomingMovies().then((upcomingMovies) => {
-      setUpcomingMovies(upcomingMovies.results);
-    });
-    
-  },[])
-  
-  
-
+function SettingsScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-    <ScrollView >  
-      <View >
-     <Text>Popular Movies</Text>
-      <MovieList movies={popularMovies} ></MovieList>
-      </View>
-      <View>
-      <Text>Top Rated Movies</Text>
-      <MovieList movies={topRatedMovies}></MovieList>
-      </View>
-      <View>
-      <Text> Upcoming Movies</Text>
-      <MovieList movies={upcomingMovies}></MovieList>
-      </View>
-      </ScrollView>
-    
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-   
-  }
-});
+const Tab = createBottomTabNavigator();
 
-
-
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Watchlist" component={WatchlistScreen} />
+        <Tab.Screen name="Favourites" component={FavouritesScreen}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
