@@ -1,14 +1,17 @@
 import React from 'react';
 import {Image, TouchableHighlight, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const MovieItem = ({posterPath}) => {
+const MovieItem = ({backdropPath, posterPath, genreIds, title, overview}) => {
+
+  const navigation = useNavigation();
+
    
     const baseUrl = {uri: "https://image.tmdb.org/t/p/w500/" + posterPath};
+    
     return (
 
-        <TouchableHighlight style={styles.item}  onPress={() => {
-            alert('You tapped the button!');
-          }}>
+        <TouchableHighlight style={styles.item}  onPress={() => navigation.navigate('MovieDetailScreen', {backdropPath: backdropPath,posterPath: posterPath, genreIds: genreIds, title:title, overview: overview}) }>
             <Image source={baseUrl} style={styles.image}>
             
             </Image>
