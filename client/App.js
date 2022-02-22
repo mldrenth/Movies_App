@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import WatchlistScreen from './screens/WatchlistScreen';
+import FavouritesScreen from './screens/FavouritesScreen';
 
 
 // function HomeScreen() {
@@ -30,6 +31,7 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Watchlist" component={WatchlistScreen} />
+        <Tab.Screen name="Favourites" component={FavouritesScreen}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
