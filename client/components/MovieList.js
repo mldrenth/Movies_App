@@ -7,6 +7,7 @@ const MovieList = ({movies}) => {
   
 
     const renderItem = ({item}) => (<MovieItem
+        id={item.id}
         backdropPath={item.backdrop_path} 
         posterPath={item.poster_path}
         genreIds={item.genre_ids}  
