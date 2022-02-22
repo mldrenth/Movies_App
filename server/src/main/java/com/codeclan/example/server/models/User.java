@@ -105,7 +105,9 @@ public class User {
         this.password = password;
     }
 
-    // addMovieToFavourites()
+    public void addMovieToFavourites(Movie movie){
+        this.moviesFavourites.add(movie);
+    }
 
     public List<Movie> getMoviesFavourites() {
         return moviesFavourites;
@@ -115,7 +117,9 @@ public class User {
         this.moviesFavourites = moviesFavourites;
     }
 
-    // addMovieToWatchlist()
+    public void addMovieToWatchlist(Movie movie) {
+        this.moviesWatchlist.add(movie);
+    }
 
     public List<Movie> getMoviesWatchlist() {
         return moviesWatchlist;

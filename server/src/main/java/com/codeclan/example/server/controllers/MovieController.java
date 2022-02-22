@@ -1,13 +1,10 @@
 package com.codeclan.example.server.controllers;
 import com.codeclan.example.server.models.Movie;
-import com.codeclan.example.server.models.User;
 import com.codeclan.example.server.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,6 +28,26 @@ public class MovieController {
     public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
         movieRepository.save(movie);
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/movies/{id}")
+    public ResponseEntity<Movie> putMovie(@RequestBody Movie movie, @PathVariable Long id) {
+        Movie movieToUpdate = movieRepository.findById(id).get();
+//        movieToUpdate.setImageVerticalUrl(movie.getImageVerticalUrl());
+//        movieToUpdate.setImageHorizontalUrl(movie.getImageHorizontalUrl());
+//        movieToUpdate.setTitle(movie.getTitle());
+//        movieToUpdate.setGenres(movie.getGenres());
+//        movieToUpdate.setOverview(movie.getOverview());
+//        movieToUpdate.setAverageRating(movie.getAverageRating());
+//        movieToUpdate.setReleaseDate(movie.getReleaseDate());
+//        movieToUpdate.setPopularity(movie.getPopularity());
+        movieToUpdate.setUserRating(movie.getUserRating());
+//        movieToUpdate.setIdFromApi(movie.getIdFromApi());
+//        movieToUpdate.setVideo(movie.getVideo());
+//        movieToUpdate.setUsersFavourites(movie.getUsersFavourites());
+//        movieToUpdate.setUsersWatchlist(movie.getUsersWatchlist());
+        movieRepository.save(movieToUpdate);
+        return new ResponseEntity<>(movieToUpdate, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/movies/{id}")
