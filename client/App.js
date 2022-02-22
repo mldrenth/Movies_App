@@ -7,13 +7,7 @@ import WatchlistScreen from './screens/WatchlistScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
 
 
-// function HomeScreen() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Home!</Text>
-//     </View>
-//   );
-// }
+
 
 function SettingsScreen() {
   return (
