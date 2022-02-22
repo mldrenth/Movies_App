@@ -6,12 +6,17 @@ const MovieList = ({movies}) => {
     
   
 
-    const renderItem = ({item}) => (<MovieItem posterPath={item.poster_path}/>)
+    const renderItem = ({item}) => (<MovieItem
+        backdropPath={item.backdrop_path} 
+        posterPath={item.poster_path}
+        genreIds={item.genre_ids}  
+        title={item.title}
+        overview={item.overview}/>)
     
     return (
         
           
-            <FlatList style={{height: 300}} horizontal={true} data={movies} renderItem={renderItem} >
+            <FlatList style={{height: 300}} horizontal={true} data={movies} renderItem={renderItem}  >
             
             </FlatList>
     )
