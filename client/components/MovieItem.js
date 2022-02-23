@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, TouchableHighlight, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MovieItem = ({id, backdropPath, posterPath, genreIds, title, overview}) => {
+const MovieItem = ({id, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating}) => {
 
   const navigation = useNavigation();
 
@@ -11,7 +11,7 @@ const MovieItem = ({id, backdropPath, posterPath, genreIds, title, overview}) =>
     
     return (
 
-        <TouchableHighlight style={styles.item}  onPress={() => navigation.navigate('MovieDetailScreen', {id: id,backdropPath: backdropPath,posterPath: posterPath, genreIds: genreIds, title:title, overview: overview}) }>
+        <TouchableHighlight style={styles.item}  onPress={() => navigation.navigate('MovieDetailScreen', {id: id,backdropPath: backdropPath,posterPath: posterPath, genreIds: genreIds, title:title, overview: overview, voteAverage: voteAverage, releaseDate: releaseDate, popularity: popularity, userRating: userRating}) }>
             <Image source={baseUrl} style={styles.image}>
             
             </Image>
