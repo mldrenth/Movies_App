@@ -24,8 +24,6 @@ const FavouritesScreen = () => {
         })
     }, [])
 
-    // console.log("moviesFavourites", moviesFavourites);
-
     return (
         <View>
             <Text>{username}</Text>

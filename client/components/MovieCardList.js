@@ -4,16 +4,14 @@ import MovieCard from './MovieCard';
 
 const MovieCardList = ({movies}) => {
 
-    const renderItem = ({item}) => {
-        (<MovieCard title={item.title} posterPath={item.poster_path}/>)
-    }
-
+    const renderItem = ({item}) => (<MovieCard 
+        title={item.title} 
+        posterPath={item.poster_path}/>)
+    
     return (
-        <View>
-        <Text>MovieCardList</Text>
-        {/* <FlatList data={movies} renderItem={renderItem}></FlatList> */}
-        </View>
+        <FlatList data={movies} renderItem={renderItem}></FlatList>
     )
+
 }
 
 export default MovieCardList;
