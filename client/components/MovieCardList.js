@@ -6,15 +6,15 @@ const MovieCardList = ({movies}) => {
 
     const renderItem = ({item}) => (<MovieCard 
         id={item.id}
-        backdropPath={item.backdrop_path} 
-        posterPath={item.poster_path}
+        backdropPath={item.backdropPath} 
+        posterPath={item.posterPath}
         genreIds={item.genre_ids}  
         title={item.title}
         overview={item.overview}
-        voteAverage={item.vote_average}
-        releaseDate={item.release_date}
+        voteAverage={item.voteAverage}
+        releaseDate={item.releaseDate}
         popularity={item.popularity}
-        userRating={item.vote_average}/>)
+        userRating={item.voteAverage}/>)
     
     return (
         <FlatList data={movies} renderItem={renderItem}></FlatList>
