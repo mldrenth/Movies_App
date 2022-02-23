@@ -3,11 +3,14 @@ import { getUserData } from '../services/UserServices';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
 import MovieCardList from '../components/MovieCardList';
+import { useIsFocused } from "@react-navigation/native";
 
 const FavouritesScreen = () => {
 
     const [username, setUsername] = useState("");
     const [moviesFavourites, setMoviesFavourites] = useState([]);
+
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         getUserData()
@@ -22,7 +25,7 @@ const FavouritesScreen = () => {
         .then((userData) => {
             setMoviesFavourites(userData.moviesFavourites)
         })
-    }, [])
+    }, [isFocused])
 
     return (
         <View>
