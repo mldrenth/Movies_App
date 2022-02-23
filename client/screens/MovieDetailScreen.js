@@ -33,11 +33,11 @@ const MovieDetailScreen = () => {
 
     const handleSave = () => {
       addMovie({
-        imageVerticalUrl: posterPath,
-        imageHorizontalUrl: backdropPath,
+        posterPath: posterPath,
+        backdropPath: backdropPath,
         title: title,
         overview: overview,
-        averageRating: voteAverage,
+        voteAverage: voteAverage,
         releaseDate: releaseDate,
         popularity: popularity,
         userRating: voteAverage,
