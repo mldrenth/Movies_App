@@ -1,5 +1,7 @@
 package com.codeclan.example.server.controllers;
+import com.codeclan.example.server.models.Movie;
 import com.codeclan.example.server.models.User;
+import com.codeclan.example.server.repositories.MovieRepository;
 import com.codeclan.example.server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,9 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    MovieRepository movieRepository;
 
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -46,6 +51,26 @@ public class UserController {
     public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "users/{id}/favourites")
+    public ResponseEntity<Movie> addMovieToFavourites(@RequestBody Movie movie, @PathVariable Long id) {
+        movieRepository.save(movie);
+        User userToAddMovieTo = userRepository.findById(id).get();
+        userToAddMovieTo.addMovieToFavourites(movie);
+        userRepository.save(userToAddMovieTo);
+        User userThatChanged = userRepository.findById(id).get();
+        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "users/{id}/watchlist")
+    public ResponseEntity<Movie> addMovieToWatchlist(@RequestBody Movie movie, @PathVariable Long id) {
+        movieRepository.save(movie);
+        User userToAddMovieTo = userRepository.findById(id).get();
+        userToAddMovieTo.addMovieToWatchlist(movie);
+        userRepository.save(userToAddMovieTo);
+        User userThatChanged = userRepository.findById(id).get();
+        return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
 
 //    @GetMapping(value = "/users/{userId}/")

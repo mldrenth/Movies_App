@@ -6,6 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getVideoKey } from '../services/MovieApiServices';
 import { addMovie } from '../services/MovieServices';
+import { addMovieToFavourites, addMovieToWatchlist } from '../services/UserServices';
 
 const MovieDetailScreen = () => {
 
@@ -31,8 +32,24 @@ const MovieDetailScreen = () => {
         getVideoKey(id).then((moviekeys) => setYoutubeKey(moviekeys.results[0].key))
     },[])
 
-    const handleSave = () => {
-      addMovie({
+    const handleSaveFavourites = () => {
+      addMovieToFavourites({
+        posterPath: posterPath,
+        backdropPath: backdropPath,
+        title: title,
+        overview: overview,
+        voteAverage: voteAverage,
+        releaseDate: releaseDate,
+        popularity: popularity,
+        userRating: voteAverage,
+        idFromApi: id,
+        video: youtubeKey
+        
+      })
+    }
+
+    const handleSaveWatchlist = () => {
+      addMovieToWatchlist({
         posterPath: posterPath,
         backdropPath: backdropPath,
         title: title,
@@ -55,10 +72,10 @@ const MovieDetailScreen = () => {
         <Image source={backdropUrl} style={styles.backdrop}></Image>
         <Text style={{fontSize:20}}>{title}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '100%'}}>
-        <TouchableHighlight onPress={handleSave}>
+        <TouchableHighlight onPress={handleSaveWatchlist}>
         <Ionicons name="bookmark" size={32} color="black" />
         </TouchableHighlight>
-        <TouchableHighlight onPress={handleSave}>
+        <TouchableHighlight onPress={handleSaveFavourites}>
         <Ionicons name="heart" size={32} color="black" />
         </TouchableHighlight>
         </View>
