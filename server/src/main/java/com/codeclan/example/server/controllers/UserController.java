@@ -50,5 +50,7 @@ public class UserController {
 
 //    @GetMapping(value = "/users/{userId}/")
 
-
+    // post request to add movie to watchlist / favourites
+    // "/users/{userId}/watchlist". If movie exist in database, then add it to my fav If this does not exist in movie database, then create one
+    // "/users/{userId}/favourites"
 }
