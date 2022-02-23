@@ -14,10 +14,10 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "imageVerticalUrl")
-    private String imageVerticalUrl;
-    @Column(name = "imageHorizontalUrl")
-    private String imageHorizontalUrl;
+    @Column(name = "posterPath")
+    private String posterPath;
+    @Column(name = "backdropPath")
+    private String backdropPath;
     @Column(name = "title")
     private String title;
     @Column(name = "genres")
@@ -42,8 +42,8 @@ public class Movie {
 
     @Column(name = "overview", length=1000)
     private String overview;
-    @Column(name = "averageRating")
-    private double averageRating;
+    @Column(name = "voteAverage")
+    private double voteAverage;
     @Column(name = "releaseDate")
     private String releaseDate;
     @Column(name = "popularity")
@@ -92,13 +92,13 @@ public class Movie {
     private List<User> usersWatchlist;
 
 
-    public Movie(String imageVerticalUrl, String imageHorizontalUrl, String title, List<Genre> genres, String overview, double averageRating, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
-        this.imageVerticalUrl = imageVerticalUrl;
-        this.imageHorizontalUrl = imageHorizontalUrl;
+    public Movie(String posterPath, String backdropPath, String title, List<Genre> genres, String overview, double voteAverage, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
+        this.posterPath = posterPath;
+        this.backdropPath = backdropPath;
         this.title = title;
         this.genres = genres;
         this.overview = overview;
-        this.averageRating = averageRating;
+        this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.popularity = popularity;
         this.userRating = userRating;
@@ -120,20 +120,20 @@ public class Movie {
         this.id = id;
     }
 
-    public String getImageVerticalUrl() {
-        return imageVerticalUrl;
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public void setImageVerticalUrl(String imageVerticalUrl) {
-        this.imageVerticalUrl = imageVerticalUrl;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
-    public String getImageHorizontalUrl() {
-        return imageHorizontalUrl;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setImageHorizontalUrl(String imageHorizontalUrl) {
-        this.imageHorizontalUrl = imageHorizontalUrl;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
     public String getTitle() {
@@ -160,12 +160,12 @@ public class Movie {
         this.overview = overview;
     }
 
-    public double getAverageRating() {
-        return averageRating;
+    public double getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public String getReleaseDate() {
