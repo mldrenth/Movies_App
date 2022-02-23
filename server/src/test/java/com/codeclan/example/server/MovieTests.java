@@ -45,7 +45,7 @@ public class MovieTests {
 
     @Test
     public void hasAverageRating() {
-        assertEquals(8.3, movie1.getAverageRating(), 0.0);
+        assertEquals(8.3, movie1.getVoteAverage(), 0.0);
     }
 
     @Test
