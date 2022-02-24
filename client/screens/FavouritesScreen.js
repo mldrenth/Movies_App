@@ -29,8 +29,8 @@ const FavouritesScreen = () => {
 
     return (
         <View>
-            <Text>{username}</Text>
-            <Text> Favourites Screen</Text>
+            <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}>{username}</Text>
+            <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}> Favourites Screen</Text>
             <MovieCardList movies={moviesFavourites}/>
         </View>
     )

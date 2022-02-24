@@ -42,8 +42,8 @@ public class UserController {
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
-        userToUpdate.setMoviesFavourites(user.getMoviesFavourites());
-        userToUpdate.setMoviesWatchlist(user.getMoviesWatchlist());
+        // userToUpdate.setMoviesFavourites(user.getMoviesFavourites());
+        // userToUpdate.setMoviesWatchlist(user.getMoviesWatchlist());
         userRepository.save(userToUpdate);
         return new ResponseEntity<>(userToUpdate, HttpStatus.OK);
     }

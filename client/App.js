@@ -7,13 +7,14 @@ import WatchlistScreen from './screens/WatchlistScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
 import { StyleSheet, useColorScheme } from 'react-native';
 import { DefaultTheme, DarkTheme} from '@react-navigation/native';
+import UserScreen from './screens/UserScreen';
 
 const myTheme = {
   dark: false,
   colors: {
     primary: '#f5c517',
     background: '#060d17',
-    card: '#242c40',
+    card: '#151d30', // '#242c40'
     text: 'white',
     border: 'black',
     notification: 'rgb(255, 69, 58)',
@@ -35,13 +36,14 @@ export default function App() {
   const colorScheme = useColorScheme();
 
   return (
-
     <NavigationContainer theme={myTheme}>
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
+
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} />
         <Tab.Screen name="Favourites" component={FavouritesScreen}/>
+        <Tab.Screen name="User" component={UserScreen}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
