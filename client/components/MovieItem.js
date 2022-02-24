@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
             flex: 1,
             resizeMode: 'contain',
             height: 100,
-            width: 200
+            width: 200,
+            borderRadius: 18
         
           }
   
