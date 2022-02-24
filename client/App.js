@@ -5,9 +5,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import WatchlistScreen from './screens/WatchlistScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { DefaultTheme, DarkTheme} from '@react-navigation/native';
 
-
-
+const myTheme = {
+  dark: false,
+  colors: {
+    primary: '#f5c517',
+    background: '#060d17',
+    card: '#242c40',
+    text: 'white',
+    border: 'black',
+    notification: 'rgb(255, 69, 58)',
+  },
+};
 
 function SettingsScreen() {
   return (
@@ -20,8 +31,13 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+  const colorScheme = useColorScheme();
+
   return (
-    <NavigationContainer>
+
+    <NavigationContainer theme={myTheme}>
+    {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} />
