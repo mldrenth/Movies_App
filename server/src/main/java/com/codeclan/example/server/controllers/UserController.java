@@ -3,6 +3,7 @@ import com.codeclan.example.server.models.Movie;
 import com.codeclan.example.server.models.User;
 import com.codeclan.example.server.repositories.MovieRepository;
 import com.codeclan.example.server.repositories.UserRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,23 +54,46 @@ public class UserController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @PostMapping(value = "users/{id}/favourites")
-    public ResponseEntity<Movie> addMovieToFavourites(@RequestBody Movie movie, @PathVariable Long id) {
-        movieRepository.save(movie);
-        User userToAddMovieTo = userRepository.findById(id).get();
-        userToAddMovieTo.addMovieToFavourites(movie);
-        userRepository.save(userToAddMovieTo);
-        User userThatChanged = userRepository.findById(id).get();
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+
+    @GetMapping(value = "users/{id}/watchlist")
+    public ResponseEntity<List<Movie>> getAllMoviesInUsersWatchlist(@PathVariable Long id){
+
+        return new ResponseEntity<>(movieRepository.findMoviesUsersWatchlistById(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "users/{id}/watchlist")
     public ResponseEntity<Movie> addMovieToWatchlist(@RequestBody Movie movie, @PathVariable Long id) {
-        movieRepository.save(movie);
         User userToAddMovieTo = userRepository.findById(id).get();
-        userToAddMovieTo.addMovieToWatchlist(movie);
-        userRepository.save(userToAddMovieTo);
-        User userThatChanged = userRepository.findById(id).get();
+        if(movieRepository.existsMovieByidFromApi(movie.getIdFromApi())){
+            Movie movieToEdit = movieRepository.findMovieByidFromApi(movie.getIdFromApi());
+            userToAddMovieTo.addMovieToWatchlist(movieToEdit);
+            userRepository.save(userToAddMovieTo);
+
+        }
+        else {
+//
+            movieRepository.save(movie);
+            userToAddMovieTo.addMovieToWatchlist(movie);
+            userRepository.save(userToAddMovieTo);
+        }
+        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "users/{id}/favourites")
+    public ResponseEntity<Movie> addMovieToFavourites(@RequestBody Movie movie, @PathVariable Long id ){
+        User userToAddMovieTo = userRepository.findById(id).get();
+        if(movieRepository.existsMovieByidFromApi(movie.getIdFromApi())){
+            Movie movieToEdit = movieRepository.findMovieByidFromApi(movie.getIdFromApi());
+            userToAddMovieTo.addMovieToFavourites(movieToEdit);
+            userRepository.save(userToAddMovieTo);
+
+        }
+        else {
+//
+            movieRepository.save(movie);
+            userToAddMovieTo.addMovieToFavourites(movie);
+            userRepository.save(userToAddMovieTo);
+        }
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
 

@@ -8,5 +8,9 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findMoviesUsersFavouritesById(Long id);
+    boolean existsMovieByidFromApi(int id);
+    Movie findMovieByidFromApi(int id);
+
+    List<Movie> findMoviesUsersWatchlistById(Long id);
 
 }
