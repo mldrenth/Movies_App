@@ -22,7 +22,7 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersFavourites"})
+    @JsonIgnoreProperties({"usersFavourites", "usersWatchlist"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesFavourites",
@@ -40,7 +40,7 @@ public class User {
     private List<Movie> moviesFavourites;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersWatchlist"})
+    @JsonIgnoreProperties({"usersWatchlist", "usersFavourites"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesWatchlist",

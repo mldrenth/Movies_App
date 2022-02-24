@@ -7,15 +7,42 @@ import { Ionicons } from '@expo/vector-icons';
 import { getVideoKey } from '../services/MovieApiServices';
 import { addMovie } from '../services/MovieServices';
 import { addMovieToFavourites, addMovieToWatchlist } from '../services/UserServices';
+import { useIsFocused } from "@react-navigation/native";
+import { getUserData } from '../services/UserServices';
+
 
 const MovieDetailScreen = () => {
 
     const [youtubeKey, setYoutubeKey] = useState("");
     const route = useRoute();
     const {id, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating} =  route.params;
+    const [userMoviesWatchlist, setUserMoviesWatchlist] = useState([]);
+    const [userMoviesFavourites, setUserMoviesFavourites] = useState([]);
     const backdropUrl = {uri: "https://image.tmdb.org/t/p/w500/" + (backdropPath)}
 
     const [playing, setPlaying] = useState(false);
+    const [userHasMovieWatchlist, setUserHasMovieWatchlist] = useState(false);
+    const [userHasMovieFavourites, setUserHasMovieFavourites] = useState(false);
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+      getUserData()
+      .then((userData) => {
+          setUserMoviesWatchlist(userData.moviesWatchlist)
+          setUserMoviesFavourites(userData.moviesFavourites)   
+          if (userData.moviesWatchlist.map((movie) => movie.idFromApi).includes(id) ) {
+            setUserHasMovieWatchlist(true);
+          }
+
+          if(userData.moviesFavourites.map((movie) => movie.idFromApi).includes(id)){
+            setUserHasMovieFavourites(true);
+          }
+          
+      })
+      
+  }, [isFocused])
+  
+
 
     const onStateChange = useCallback((state) => {
       if (state === "ended") {
@@ -46,6 +73,7 @@ const MovieDetailScreen = () => {
         video: youtubeKey
         
       })
+      setUserHasMovieFavourites(true)
     }
 
     const handleSaveWatchlist = () => {
@@ -62,6 +90,7 @@ const MovieDetailScreen = () => {
         video: youtubeKey
         
       })
+      setUserHasMovieWatchlist(true)
     }
     
 
@@ -72,12 +101,17 @@ const MovieDetailScreen = () => {
         <Image source={backdropUrl} style={styles.backdrop}></Image>
         <Text style={{fontSize:20}}>{title}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '100%'}}>
+        {userHasMovieWatchlist ?
+        <Ionicons name="bookmark" size={32} color="#f5c517" /> :
         <TouchableHighlight onPress={handleSaveWatchlist}>
+          
         <Ionicons name="bookmark" size={32} color="black" />
-        </TouchableHighlight>
+        </TouchableHighlight>}
+        {userHasMovieFavourites ?
+        <Ionicons name="heart" size={32} color="#f5c517" /> :
         <TouchableHighlight onPress={handleSaveFavourites}>
         <Ionicons name="heart" size={32} color="black" />
-        </TouchableHighlight>
+        </TouchableHighlight> }
         </View>
         {youtubeKey?<View style={{flex:1}}>
             <Text>Trailer</Text>

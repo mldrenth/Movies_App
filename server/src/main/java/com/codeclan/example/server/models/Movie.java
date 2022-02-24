@@ -56,7 +56,7 @@ public class Movie {
     private String video;
 
     @ManyToMany
-    @JsonIgnoreProperties({"moviesFavourites"})
+    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesFavourites",
@@ -74,7 +74,7 @@ public class Movie {
     private List<User> usersFavourites;
 
     @ManyToMany
-    @JsonIgnoreProperties({"moviesWatchlist"})
+    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesWatchlist",
@@ -222,6 +222,14 @@ public class Movie {
 
     public void setUsersWatchlist(List<User> usersWatchlist) {
         this.usersWatchlist = usersWatchlist;
+    }
+
+    public void addUserToUsersWatchlist(User user){
+        this.usersWatchlist.add(user);
+    }
+
+    public void addUserToUsersFavourites(User user){
+        this.usersFavourites.add(user);
     }
 
 }

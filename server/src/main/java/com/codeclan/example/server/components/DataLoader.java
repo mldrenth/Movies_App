@@ -132,9 +132,15 @@ public class DataLoader implements ApplicationRunner  {
         // Users
         User user1 = new User("Fiona", "fiona.g@gmail.com", "888");
         user1.addMovieToFavourites(movie1);
+
         user1.addMovieToFavourites(movie2);
+
         user1.addMovieToWatchlist(movie3);
+
         userRepository.save(user1);
+        movieRepository.save(movie1);
+        movieRepository.save(movie2);
+        movieRepository.save(movie3);
     }
 
 }
