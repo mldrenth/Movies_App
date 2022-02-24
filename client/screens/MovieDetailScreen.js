@@ -99,22 +99,22 @@ const MovieDetailScreen = () => {
         <View style={{flex:1, alignItems:'center'}}>
         <ScrollView>
         <Image source={backdropUrl} style={styles.backdrop}></Image>
-        <Text style={{fontSize:20}}>{title}</Text>
+        <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>{title}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '100%'}}>
         {userHasMovieWatchlist ?
         <Ionicons name="bookmark" size={32} color="#f5c517" /> :
         <TouchableHighlight onPress={handleSaveWatchlist}>
           
-        <Ionicons name="bookmark" size={32} color="black" />
+        <Ionicons name="bookmark" size={32} color="#8a8d98" />
         </TouchableHighlight>}
         {userHasMovieFavourites ?
         <Ionicons name="heart" size={32} color="#f5c517" /> :
         <TouchableHighlight onPress={handleSaveFavourites}>
-        <Ionicons name="heart" size={32} color="black" />
+        <Ionicons name="heart" size={32} color="#8a8d98" />
         </TouchableHighlight> }
         </View>
         {youtubeKey?<View style={{flex:1}}>
-            <Text>Trailer</Text>
+            <Text style={{color:"#f5c517"}}>Trailer</Text>
             <YoutubePlayer height={300}
         play={playing}
         videoId={youtubeKey}
@@ -124,8 +124,8 @@ const MovieDetailScreen = () => {
         
         </View> : null}
         
-        <Text>OVERVIEW</Text>
-        <Text>{overview}</Text>
+        <Text style={{color:"#f5c517"}}>Overview</Text>
+        <Text style={{color:"#b5b7b9"}}>{overview}</Text>
         </ScrollView>
             </View>
     

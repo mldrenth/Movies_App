@@ -39,15 +39,15 @@ const HomeScreenList = ({}) => {
       <SafeAreaView style={styles.container}>
       <ScrollView >  
         <View >
-       <Text>Popular Movies</Text>
+       <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}>Popular Movies</Text>
         <MovieList movies={popularMovies} ></MovieList>
         </View>
         <View>
-        <Text>Top Rated Movies</Text>
+        <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}>Top Rated Movies</Text>
         <MovieList movies={topRatedMovies}></MovieList>
         </View>
         <View>
-        <Text> Upcoming Movies</Text>
+        <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}> Upcoming Movies</Text>
         <MovieList movies={upcomingMovies}></MovieList>
         </View>
         </ScrollView>
