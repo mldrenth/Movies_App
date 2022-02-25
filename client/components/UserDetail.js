@@ -6,12 +6,6 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const UserDetail = ({user}) => {
 
-
-    const handleUpdateUser = () => {
-        const user = {id : 1, email: "email@gmail.com", password: "888"}
-        updateUser(user).then(() => {return 1})
-    }
-
     return (
 
         <View style={styles.container}>
@@ -22,10 +16,6 @@ const UserDetail = ({user}) => {
             <Text style={styles.text}>Phone No: {user.phoneNumber}</Text>
             <Text style={styles.text}>Email: {user.email}</Text>
             <Text style={styles.text}>Password: {user.password}</Text>
-
-            <View style={{paddingTop:10 }}>
-                <FontAwesome onPress={() => handleUpdateUser()} name="edit" size={24} color="#f5c517"/>
-            </View>
         </View>
 
     )
