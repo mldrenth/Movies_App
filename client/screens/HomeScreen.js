@@ -8,6 +8,7 @@ import HomeScreenList from './HomeScreenList';
 import MovieDetailScreen from './MovieDetailScreen';
 
 
+
 const HomeScreen = () => {
 
 const Stack = createNativeStackNavigator();

@@ -19,7 +19,6 @@ const WatchlistScreen = () => {
     
     return (
         <View>
-            <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}> Watchlist Screen</Text>
             <MovieCardList movies={moviesWatchlist}/>
         </View>
 
