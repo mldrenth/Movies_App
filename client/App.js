@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, createMaterialTopTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import WatchlistScreen from './screens/WatchlistScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
-import { StyleSheet, useColorScheme } from 'react-native';
 import { DefaultTheme, DarkTheme} from '@react-navigation/native';
 import UserScreen from './screens/UserScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+
 
 const myTheme = {
   dark: false,
@@ -29,6 +32,9 @@ function SettingsScreen() {
   );
 }
 
+// const TabTop = createMaterialTopTabNavigator();
+
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -39,12 +45,36 @@ export default function App() {
     <NavigationContainer theme={myTheme}>
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
 
-      <Tab.Navigator>
+      <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+      
+                  if (route.name === "Home") {
+                    iconName = focused ? "home" : "home-outline";
+                  } else if (route.name === "Watchlist") {
+                    iconName = focused ? "bookmark" : "bookmark-outline";
+                  } else if (route.name === "Favourites") {
+                    iconName = focused ? "heart" : "heart-outline";
+                  }
+      
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: "#f5c517",
+                tabBarInactiveTintColor: "gray",
+              })}>
+
         <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} />
         <Tab.Screen name="Favourites" component={FavouritesScreen}/>
         <Tab.Screen name="User" component={UserScreen}/>
       </Tab.Navigator>
+
+      {/* <TabTop.Navigator>
+      <TabTop.Screen name="Home" />
+      <TabTop.Screen name="Settings"/>
+    </TabTop.Navigator> */}
+
     </NavigationContainer>
   );
 }
