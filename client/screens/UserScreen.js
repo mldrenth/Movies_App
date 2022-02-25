@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import { getUserData, updateUser } from '../services/UserServices';
-import {View, Text, FlatList} from 'react-native'
+import {View, Text, FlatList, StyleSheet} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Button } from 'react-native-web';
 
@@ -24,17 +24,32 @@ const UserScreen = () => {
 
 
     return (
-        <View style={{padding:10}}>
-            <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold" }}>User information</Text>
 
-            <Text style={{ color:"white" }}>{user.username}</Text>
-            <Text style={{ color:"white" }}>{user.email}</Text>
-
+        <View style={styles.container}>
+            <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:15 }}>User information</Text>
+            <Text style={styles.text}>Username: {user.username}</Text>
+            <Text style={styles.text}>First Name: {user.firstName}</Text>
+            <Text style={styles.text}>Last Name: {user.lastName}</Text>
+            <Text style={styles.text}>Phone No: {user.phoneNumber}</Text>
+            <Text style={styles.text}>Email: {user.email}</Text>
             {/* <FontAwesome onPress={() => updateUser()} name="edit" size={24} color="#f5c517"/> */}
-
         </View>
+
+        
     )
     
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+        justifyContent: 'center',
+        fontWeight:"bold"
+    },
+    text: {
+        color:"white",
+        fontSize: 15
+    }
+  });
 
 export default UserScreen;

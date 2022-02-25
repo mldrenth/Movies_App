@@ -31,7 +31,7 @@ export const addMovieToWatchlist = (movie) => {
 
 export const updateUser = (user) => {
     return fetch(baseURL + "/" + user.id, {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(user),
         headers: {
             'Content-Type': 'application/json'

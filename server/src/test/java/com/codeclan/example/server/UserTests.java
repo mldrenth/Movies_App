@@ -19,7 +19,7 @@ public class UserTests {
 
     @Before
     public void before() {
-        user1 = new User("Fiona", "fiona.g@gmail.com", "888");
+        user1 = new User("FionaG", "Fiona", "Graham", "+447366258836", "fiona.g@gmail.com", "888");
 
         action = new Genre(28, "Action");
         adventure = new Genre(12, "Adventure");
@@ -36,8 +36,23 @@ public class UserTests {
     }
 
     @Test
-    public void hasName() {
-        assertEquals("Fiona", user1.getUsername());
+    public void hasUserName() {
+        assertEquals("FionaG", user1.getUsername());
+    }
+
+    @Test
+    public void hasFirstName() {
+        assertEquals("Fiona", user1.getFirstName());
+    }
+
+    @Test
+    public void hasLastName() {
+        assertEquals("Graham", user1.getLastName());
+    }
+
+    @Test
+    public void hasPhoneNumber() {
+        assertEquals("+447366258836", user1.getPhoneNumber());
     }
 
     @Test
