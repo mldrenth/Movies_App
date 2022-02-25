@@ -20,8 +20,8 @@ public class Movie {
     private String backdropPath;
     @Column(name = "title")
     private String title;
-    @Column(name = "genres")
 
+    @Column(name = "genres")
     @ManyToMany
     @JsonIgnoreProperties({"movies"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
