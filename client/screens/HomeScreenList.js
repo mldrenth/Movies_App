@@ -39,15 +39,15 @@ const HomeScreenList = ({}) => {
       <SafeAreaView style={styles.container}>
       <ScrollView >  
         <View >
-       <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}>Popular Movies</Text>
+       <Text style={styles.text}>Popular Movies</Text>
         <MovieList movies={popularMovies} ></MovieList>
         </View>
         <View>
-        <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}>Top Rated Movies</Text>
+        <Text style={styles.text}>Top Rated Movies</Text>
         <MovieList movies={topRatedMovies}></MovieList>
         </View>
         <View>
-        <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}> Upcoming Movies</Text>
+        <Text style={styles.text}> Upcoming Movies</Text>
         <MovieList movies={upcomingMovies}></MovieList>
         </View>
         </ScrollView>
@@ -63,8 +63,13 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-     
-    }
+    },
+    text: {
+      color: "#f5c517",
+      fontSize: 15,
+      paddingLeft: 10,
+      fontWeight:"bold"
+  }
   });
 
 export default HomeScreenList

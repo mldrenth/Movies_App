@@ -16,6 +16,12 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -61,8 +67,11 @@ public class User {
     // friends(List of Users)   // TODO
 
 
-    public User(String username, String email, String password) {
+    public User(String username, String firstName, String lastName, String phoneNumber, String email, String password) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
         this.moviesFavourites = new ArrayList<Movie>();
@@ -87,6 +96,30 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {

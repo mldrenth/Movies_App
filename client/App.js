@@ -56,7 +56,11 @@ export default function App() {
                     iconName = focused ? "bookmark" : "bookmark-outline";
                   } else if (route.name === "Favourites") {
                     iconName = focused ? "heart" : "heart-outline";
-                  }
+                  } else if (route.name === "User") {
+                    iconName = focused ? "person" : "person-outline";
+                  } // else if (route.name === "Search") {
+                    // iconName = focused ? "search" : "search-outline";
+                  // }
       
                   return <Ionicons name={iconName} size={size} color={color} />;
                 },
