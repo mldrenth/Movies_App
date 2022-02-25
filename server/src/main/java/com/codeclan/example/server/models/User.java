@@ -162,4 +162,12 @@ public class User {
         this.moviesWatchlist = moviesWatchlist;
     }
 
+    public void removeMovieFromFavourites(Movie movie) {
+        this.moviesFavourites.remove(movie);
+    }
+
+    public void removeMovieFromWatchlist(Movie movie) {
+        this.moviesWatchlist.remove(movie);
+    }
+
 }

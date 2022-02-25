@@ -15,7 +15,7 @@ const WatchlistScreen = () => {
         .then((userData) => {
             setMoviesWatchlist(userData.moviesWatchlist)
         })
-    }, [isFocused])
+    }, [isFocused, moviesWatchlist])
     
     return (
         <View>

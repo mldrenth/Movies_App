@@ -25,7 +25,7 @@ const FavouritesScreen = () => {
         .then((userData) => {
             setMoviesFavourites(userData.moviesFavourites)
         })
-    }, [isFocused])
+    }, [isFocused, moviesFavourites])
 
     return (
         <View>
