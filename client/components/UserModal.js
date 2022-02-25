@@ -4,9 +4,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import UserForm from '../components/UserForm';
 
 
-const UserModal = ({user}) => {
+const UserModal = ({user, setUpdatedUser}) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+
+    const closeModalOnSubmit = () => {
+        setModalVisible(false)
+    }
 
     return (
         <View style={styles.centeredView}>
@@ -23,7 +27,7 @@ const UserModal = ({user}) => {
                     <View style={styles.modalView}>
                     <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:15 }}>Edit User details</Text>
                 
-                    <UserForm user={user}/>
+                    <UserForm user={user} setUpdatedUser={setUpdatedUser} closeModalOnSubmit={closeModalOnSubmit}/>
 
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
@@ -39,7 +43,6 @@ const UserModal = ({user}) => {
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}
             >
-
             </Pressable>
         </View>
     );

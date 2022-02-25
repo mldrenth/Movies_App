@@ -40,6 +40,9 @@ public class UserController {
     public ResponseEntity<User> putUser(@RequestBody User user, @PathVariable Long id) {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         // userToUpdate.setMoviesFavourites(user.getMoviesFavourites());
