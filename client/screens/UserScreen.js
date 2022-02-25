@@ -7,7 +7,6 @@ import UserModal from '../components/UserModal';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 
-
 const UserScreen = () => {
 
     const [user, setUser] = useState("");
@@ -20,36 +19,16 @@ const UserScreen = () => {
         })
     }, [])
 
-
-    const handleUpdateUser = () => {
-        const user = {id : 1, email: "email@gmail.com", password: "8688"}
-        updateUser(user).then(() => {return 1})
-    }
-
-    const handleEditUser = () => {
-        setEditUser(!editUser)
+    const setUpdatedUser = (user) => {
+        setUser(user)
     }
 
     return (
-
         <View>
-            { editUser ? <UserForm user={user}/> :null }
-
             <UserDetail user={user}/>
-
-            <View style={{paddingLeft:20 }}>
-                <FontAwesome onPress={() => handleUpdateUser()} name="edit" size={24} color="#f5c517"/>
-                
-
-                <FontAwesome onPress={() => handleEditUser()} name="edit" size={24} color="#f5c517"/>
-            </View>
-
-            <UserModal user={user}/>
-
+            <UserModal user={user} setUpdatedUser={setUpdatedUser}/>
         </View>
-       
-    )
-    
+    )   
 }
 
 export default UserScreen;

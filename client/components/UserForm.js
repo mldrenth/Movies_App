@@ -1,132 +1,134 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import {useState, useEffect} from 'react';
+import { Text, View, StyleSheet, TextInput, Button, Alert, Pressable } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import Constants from 'expo-constants';
 import { updateUser } from '../services/UserServices';
+import { Feather } from '@expo/vector-icons'; 
 
 
-const UserForm = ({user}) => {
+const UserForm = ({user, setUpdatedUser, closeModalOnSubmit}) => {
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: {
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        password: user.password
-    }
-  });
-  const onSubmit = data => console.log(data);;
-//   const onSubmit = data => updateUser(data);
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            email: user.email,
+            password: user.password
+        }
+    });
+    const onSubmit = data => updateUser(data).then(data => {setUpdatedUser(data); closeModalOnSubmit()});
 
-  return (
-    <View>
-        <Controller
-            control={control}
-            rules={{
-            required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+    return (
+        <View>
+            <Controller
+                control={control}
+                rules={{
+                required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="username"
             />
-            )}
-            name="username"
-        />
-        {errors.userName && <Text>This is required.</Text>}
+            {errors.userName && <Text>This is required.</Text>}
 
-        <Controller
-            control={control}
-            rules={{
-            required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <Controller
+                control={control}
+                rules={{
+                required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="firstName"
             />
-            )}
-            name="firstName"
-        />
-        {errors.firstName && <Text>This is required.</Text>}
+            {errors.firstName && <Text>This is required.</Text>}
 
-        <Controller
-            control={control}
-            rules={{
-            maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <Controller
+                control={control}
+                rules={{
+                maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="lastName"
             />
-            )}
-            name="lastName"
-        />
-        {errors.lastName && <Text>This is required.</Text>}
+            {errors.lastName && <Text>This is required.</Text>}
 
-        <Controller
-            control={control}
-            rules={{
-            maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <Controller
+                control={control}
+                rules={{
+                maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="phoneNumber"
             />
-            )}
-            name="phoneNumber"
-        />
-        {errors.phoneNumber && <Text>This is required.</Text>}
+            {errors.phoneNumber && <Text>This is required.</Text>}
 
-        <Controller
-            control={control}
-            rules={{
-            maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <Controller
+                control={control}
+                rules={{
+                maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="email"
             />
-            )}
-            name="email"
-        />
-        {errors.email && <Text>This is required.</Text>}
+            {errors.email && <Text>This is required.</Text>}
 
-        <Controller
-            control={control}
-            rules={{
-            maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <Controller
+                control={control}
+                rules={{
+                maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                />
+                )}
+                name="password"
             />
-            )}
-            name="password"
-        />
-        {errors.password && <Text>This is required.</Text>}
+            {errors.password && <Text>This is required.</Text>}
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-    </View>
-  );
+            <Button title="Submit" onPress={handleSubmit(onSubmit)}/>
+            
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -150,10 +152,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#0e101c',
     },
     input: {
-      backgroundColor: 'white',
-      height: 40,
+      backgroundColor: '#10161d',
+      color: 'white',
+      height: 32,
       padding: 10,
-      borderRadius: 4,
+      marginVertical: 3,
+      borderRadius: 7,
     },
   });
 

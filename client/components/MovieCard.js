@@ -37,12 +37,12 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
     }
 
     return (
-        <View style={{flexDirection: 'row', marginRight:10, marginLeft:10, marginTop:10, backgroundColor: '#10161d', borderRadius: 10}}>
+        <View style={{flexDirection: "row", marginRight:10, marginLeft:10, marginTop:10, backgroundColor: "#10161d", borderRadius: 10}}>
             <View>
                 <Image source={baseUrl} style={styles.image}></Image>
             </View>
             <View style={{margin: 10, width: 130}}>
-                <Text style={{fontSize:20, color:"#fcfdfd", fontWeight:'bold'}}>{title}</Text>
+                <Text style={{fontSize:20, color:"#fcfdfd", fontWeight:"bold"}}>{title}</Text>
                 <Text style={{fontSize:20, color:"#b5b7b9", marginBottom: 10}}>({releaseDate.substring(0, 4)})</Text>
                 <Text style={{marginBottom:10, color:"#575c61"}}>{overview.substring(0, 100) + "..."}</Text>
                 <Text style={{marginBottom:10, fontSize:17}}> 
@@ -51,7 +51,7 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
                 <Text style={{fontSize:17}}>
                     <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {userRating}</Text> 
                 </Text>
-                <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
                {userHasMovieWatchlist ? <MaterialCommunityIcons name="bookmark-remove-outline" size={30} color="#f5c517" onPress={handleRemoveWatchlist} /> : null}
                 {userHasMovieFavourites ? <MaterialCommunityIcons name="heart-remove-outline" size={30} color="#f5c517" onPress={handleRemoveFavourites} /> : null }
                 </View>
