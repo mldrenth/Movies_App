@@ -68,10 +68,8 @@ public class UserController {
             Movie movieToEdit = movieRepository.findMovieByidFromApi(movie.getIdFromApi());
             userToAddMovieTo.addMovieToWatchlist(movieToEdit);
             userRepository.save(userToAddMovieTo);
-
         }
         else {
-//
             movieRepository.save(movie);
             userToAddMovieTo.addMovieToWatchlist(movie);
             userRepository.save(userToAddMovieTo);
@@ -89,7 +87,6 @@ public class UserController {
 
         }
         else {
-//
             movieRepository.save(movie);
             userToAddMovieTo.addMovieToFavourites(movie);
             userRepository.save(userToAddMovieTo);

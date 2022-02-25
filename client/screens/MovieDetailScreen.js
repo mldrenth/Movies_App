@@ -9,6 +9,7 @@ import { addMovie } from '../services/MovieServices';
 import { addMovieToFavourites, addMovieToWatchlist } from '../services/UserServices';
 import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from '../services/UserServices';
+import { getAllGenres } from '../services/GenreServices';
 
 
 const MovieDetailScreen = () => {
@@ -18,6 +19,7 @@ const MovieDetailScreen = () => {
     const {id, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating} =  route.params;
     const [userMoviesWatchlist, setUserMoviesWatchlist] = useState([]);
     const [userMoviesFavourites, setUserMoviesFavourites] = useState([]);
+    const [movieGenres, setMovieGenres] = useState([]);
     const backdropUrl = {uri: "https://image.tmdb.org/t/p/w500/" + (backdropPath)}
 
     const [playing, setPlaying] = useState(false);
@@ -41,7 +43,24 @@ const MovieDetailScreen = () => {
       })
       
   }, [isFocused])
+
+  useEffect(() => {
+    getAllGenres()
+    .then((genres) => {
+        const genresToAdd = genres.filter((genre) => genreIds.includes(genre.idFromApi))
+        setMovieGenres(genresToAdd)
+    }
+    
+    )
+    
+}, [isFocused])
+
   
+ const genreBadges = movieGenres.map((genre) => {
+  return ( <View key={genre.id} style={{borderRadius: 10, backgroundColor: '#151D30', padding: 5, marginBottom: 5}}>
+  <Text style={{color:"#b5b7b9"}} key={genre.id}>{genre.name}</Text></View>)
+
+})
 
 
     const onStateChange = useCallback((state) => {
@@ -56,6 +75,7 @@ const MovieDetailScreen = () => {
     }, []);
 
     useEffect(() => {
+        
         getVideoKey(id).then((moviekeys) => setYoutubeKey(moviekeys.results[0].key))
     },[])
 
@@ -64,6 +84,7 @@ const MovieDetailScreen = () => {
         posterPath: posterPath,
         backdropPath: backdropPath,
         title: title,
+        genres: movieGenres,
         overview: overview,
         voteAverage: voteAverage,
         releaseDate: releaseDate,
@@ -81,6 +102,7 @@ const MovieDetailScreen = () => {
         posterPath: posterPath,
         backdropPath: backdropPath,
         title: title,
+        genres: movieGenres,
         overview: overview,
         voteAverage: voteAverage,
         releaseDate: releaseDate,
@@ -97,9 +119,9 @@ const MovieDetailScreen = () => {
 
     return (
         <View style={{flex:1, alignItems:'center'}}>
-        <ScrollView>
+        <ScrollView style={{maxWidth: '100%'}}>
         <Image source={backdropUrl} style={styles.backdrop}></Image>
-        <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>{title}</Text>
+        <Text style={{fontSize:20, color:"#b5b7b9", fontWeight:"bold"}}>{title}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '100%'}}>
         {userHasMovieWatchlist ?
         <Ionicons name="bookmark" size={32} color="#f5c517" /> :
@@ -115,17 +137,17 @@ const MovieDetailScreen = () => {
         </View>
         {youtubeKey?<View style={{flex:1}}>
             <Text style={{color:"#f5c517"}}>Trailer</Text>
-            <YoutubePlayer height={300}
+            <YoutubePlayer height={250} 
         play={playing}
         videoId={youtubeKey}
-        onChangeState={onStateChange}></YoutubePlayer>
-             <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
-
-        
+        onChangeState={onStateChange}></YoutubePlayer>  
         </View> : null}
-        
+        <View style={{flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 5}}>
+        {genreBadges}
+        </View>
         <Text style={{color:"#f5c517"}}>Overview</Text>
         <Text style={{color:"#b5b7b9"}}>{overview}</Text>
+       
         </ScrollView>
             </View>
     
