@@ -94,6 +94,24 @@ public class UserController {
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "users/{id}/watchlist/{movieId}")
+    public ResponseEntity<Movie> removeMovieFromWatchlist(@PathVariable Long id, @PathVariable Long movieId){
+        User userToRemoveMovieFrom = userRepository.findById(id).get();
+        Movie movieToRemove = movieRepository.getById(movieId);
+        userToRemoveMovieFrom.removeMovieFromWatchlist(movieToRemove);
+        userRepository.save(userToRemoveMovieFrom);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "users/{id}/favourites/{movieId}")
+    public ResponseEntity<Movie> removeMovieFromFavourites(@PathVariable Long id, @PathVariable Long movieId){
+        User userToRemoveMovieFrom = userRepository.findById(id).get();
+        Movie movieToRemove = movieRepository.getById(movieId);
+        userToRemoveMovieFrom.removeMovieFromFavourites(movieToRemove);
+        userRepository.save(userToRemoveMovieFrom);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 //    @GetMapping(value = "/users/{userId}/")
 
     // post request to add movie to watchlist / favourites

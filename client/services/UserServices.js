@@ -1,3 +1,4 @@
+
 import { ip } from "./local_ip";
 
 const baseURL = "http://" + ip + ":8080/users"
@@ -38,4 +39,24 @@ export const updateUser = (user) => {
         }
     })
     .then(res => res.json())
+}
+
+export const removeMovieFromWatchlist = (movieId) => {
+    
+    return fetch(baseURL + "/1/watchlist/" + movieId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })   
+}
+
+export const removieMovieFromFavourites = (movieId) => {
+
+    return fetch(baseURL + "/1/favourites/" + movieId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }

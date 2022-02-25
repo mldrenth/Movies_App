@@ -1,11 +1,40 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import {Text, View, Image, StyleSheet} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { FlatList } from 'react-native-web';
+import { getUserData, removeMovieFromWatchlist, removieMovieFromFavourites } from '../services/UserServices';
+import { useIsFocused } from "@react-navigation/native";
 
-const MovieCard = ({id, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating}) => {
+const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating, genres, video}) => {
+
+    const [userHasMovieWatchlist, setUserHasMovieWatchlist] = useState(false);
+    const [userHasMovieFavourites, setUserHasMovieFavourites] = useState(false);
+    const isFocused = useIsFocused();
 
     const baseUrl = {uri: "https://image.tmdb.org/t/p/w500/" + posterPath};
+
+    useEffect(() => {
+        getUserData()
+        .then((userData) => {
+            if (userData.moviesWatchlist.map((movie) => movie.idFromApi).includes(idFromApi) ) {
+              setUserHasMovieWatchlist(true);
+            }
+  
+            if(userData.moviesFavourites.map((movie) => movie.idFromApi).includes(idFromApi)){
+              setUserHasMovieFavourites(true);
+            }
+            
+        })
+        
+    }, [isFocused])
+
+    const handleRemoveWatchlist = () => {
+        removeMovieFromWatchlist(id)
+    }
+
+    const handleRemoveFavourites = () => {
+        removieMovieFromFavourites(id)
+    }
 
     return (
         <View style={{flexDirection: 'row', marginRight:10, marginLeft:10, marginTop:10, backgroundColor: '#10161d', borderRadius: 10}}>
@@ -22,6 +51,10 @@ const MovieCard = ({id, backdropPath, posterPath, genreIds, title, overview, vot
                 <Text style={{fontSize:17}}>
                     <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {userRating}</Text> 
                 </Text>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+               {userHasMovieWatchlist ? <MaterialCommunityIcons name="bookmark-remove-outline" size={30} color="#f5c517" onPress={handleRemoveWatchlist} /> : null}
+                {userHasMovieFavourites ? <MaterialCommunityIcons name="heart-remove-outline" size={30} color="#f5c517" onPress={handleRemoveFavourites} /> : null }
+                </View>
             </View>
         </View>
     )
