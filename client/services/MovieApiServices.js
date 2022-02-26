@@ -25,3 +25,7 @@ export const getVideoKey = (movieId) => {
 export const getMoviesByName = (searchTerm) => {
     return fetch(baseURL + "search/movie?api_key=" + apikey + "&language=en-US&query=" + searchTerm + "&page=1&include_adult=false" ).then((res) => res.json())
 }
+
+export const getRecommendedMovies = (movieId) => {
+    return fetch(baseURL + "movie/" + movieId + "/recommendations?api_key=" + apikey + "&language=en-US&page=1").then((res) => res.json())
+}
