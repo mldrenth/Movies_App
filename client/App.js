@@ -13,8 +13,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import mt_logo from './assets/mt_logo.png'
 import { HeaderLogo, HeaderTitle } from './header/TopNavigator';
 
-// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 
 
 const myTheme = {
@@ -38,8 +36,6 @@ function SettingsScreen() {
     </View>
   );
 }
-
-// const TabTop = createMaterialTopTabNavigator();
 
 
 const Tab = createBottomTabNavigator();
@@ -85,10 +81,6 @@ export default function App() {
       </Tab.Navigator>
       
 
-      {/* <TabTop.Navigator>
-      <TabTop.Screen name="Home" />
-      <TabTop.Screen name="Settings"/>
-    </TabTop.Navigator> */}
 
     </NavigationContainer>
   );
