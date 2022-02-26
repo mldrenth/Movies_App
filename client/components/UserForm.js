@@ -142,12 +142,15 @@ const styles = StyleSheet.create({
     //   backgroundColor: '#0e101c',
     // },
     input: {
-      backgroundColor: '#10161d',
-      color: 'white',
-      height: 32,
-      padding: 10,
-      marginVertical: 3,
-      borderRadius: 7,
+        backgroundColor: '#151d30',
+        color: 'white',
+        height: 32,
+        width: 210,
+        padding: 10,
+        marginVertical: 3,
+        borderRadius: 7,
+        borderWidth: 0.3,
+        borderColor: "#f5c517"
     },
     button_container: {
         flexDirection: 'row',

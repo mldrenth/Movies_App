@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import mt_logo from './assets/mt_logo.png'
 import { HeaderLogo, HeaderTitle } from './header/TopNavigator';
+import LoginScreen from './login/Login';
 
 
 
@@ -46,10 +47,10 @@ export default function App() {
 
   return (
     
-   
+  
     <NavigationContainer theme={myTheme}>
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
-      
+
       <Tab.Navigator
               screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
@@ -69,8 +70,8 @@ export default function App() {
       
                   return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: "#f5c517",
-                tabBarInactiveTintColor: "gray",
+                // tabBarActiveTintColor: "#f5c517",
+                // tabBarInactiveTintColor: "gray",
               })}>
 
         <Tab.Screen name="Home" component={HomeScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
@@ -78,6 +79,9 @@ export default function App() {
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="User" component={UserScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
+      
+        <Tab.Screen name="Login" component={LoginScreen}/>
+
       </Tab.Navigator>
       
 
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#f5c517",
-    fontSize: 15,
+    fontSize: 16,
     paddingLeft: 10,
     fontWeight:"bold"
 }
