@@ -8,12 +8,13 @@ const UserModal = ({user, setUpdatedUser}) => {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const closeModalOnSubmit = () => {
+    const closeModal = () => {
         setModalVisible(false)
     }
 
     return (
-        <View style={styles.centeredView}>
+        <View style={styles.container}>
+          
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -24,32 +25,26 @@ const UserModal = ({user, setUpdatedUser}) => {
                 }}
                 >
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
+                  <View style={styles.modalView}>
                     <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:15 }}>Edit User details</Text>
                 
-                    <UserForm user={user} setUpdatedUser={setUpdatedUser} closeModalOnSubmit={closeModalOnSubmit}/>
-
-                    <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}
-                    >
-                        <Text style={styles.textStyle}>Cancel</Text>
-                    </Pressable>
+                    <UserForm user={user} setUpdatedUser={setUpdatedUser} closeModal={closeModal}/>
                 
-                </View>
+                  </View>
                 </View>
             </Modal>
-            <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-            >
-            </Pressable>
+
+            <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} />
+
         </View>
     );
   };
 
   
   const styles = StyleSheet.create({
+    container: {
+      marginLeft: 30
+    },
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -59,30 +54,10 @@ const UserModal = ({user, setUpdatedUser}) => {
     modalView: {
       margin: 20,
       backgroundColor: "#151d30",
-      borderRadius: 20,
+      borderRadius: 7,
       padding: 35,
       alignItems: "center",
       elevation: 5
-    },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2
-    },
-    buttonOpen: {
-      backgroundColor: "#f5c517",
-    },
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
-    textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: "center"
     }
   });
 
