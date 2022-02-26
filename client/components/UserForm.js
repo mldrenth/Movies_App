@@ -1,13 +1,12 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, TextInput, Button, Alert, Pressable } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Alert, Pressable } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import Constants from 'expo-constants';
 import { updateUser } from '../services/UserServices';
-import { Feather } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
 
 
-const UserForm = ({user, setUpdatedUser, closeModalOnSubmit}) => {
+const UserForm = ({user, setUpdatedUser, closeModal}) => {
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -19,7 +18,7 @@ const UserForm = ({user, setUpdatedUser, closeModalOnSubmit}) => {
             password: user.password
         }
     });
-    const onSubmit = data => updateUser(data).then(data => {setUpdatedUser(data); closeModalOnSubmit()});
+    const onSubmit = data => updateUser(data).then(data => {setUpdatedUser(data); closeModal()});
 
     return (
         <View>
@@ -119,14 +118,17 @@ const UserForm = ({user, setUpdatedUser, closeModalOnSubmit}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    secureTextEntry={true}
                 />
                 )}
                 name="password"
             />
             {errors.password && <Text>This is required.</Text>}
 
-            <Button title="Submit" onPress={handleSubmit(onSubmit)}/>
-            
+            <View style={styles.button_container}>
+                <AntDesign style={{paddingRight:10}} name="checkcircleo" size={30} color="#f5c517" onPress={handleSubmit(onSubmit)}/>
+                <AntDesign style={{paddingLeft:10}} name="closecircleo" size={30} color="#5799ef" onPress={() => closeModal()}/>
+            </View>
         </View>
     );
 }
@@ -159,6 +161,10 @@ const styles = StyleSheet.create({
       marginVertical: 3,
       borderRadius: 7,
     },
+    button_container: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10    }
   });
 
 export default UserForm;
