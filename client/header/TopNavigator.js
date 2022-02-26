@@ -7,7 +7,7 @@ export const HeaderLogo = () => {
   return (
    
     <Image
-      style={{ width: 30, height: 30, alignSelf: 'center' }}
+      style={{ width: 40, height: 30, alignSelf: 'center' }}
       source={mt_logo}
     />
    

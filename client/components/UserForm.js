@@ -134,32 +134,23 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
 }
 
 const styles = StyleSheet.create({
-    label: {
-      color: 'white',
-      margin: 20,
-      marginLeft: 0,
-    },
-    button: {
-      marginTop: 40,
-      color: 'white',
-      height: 40,
-      backgroundColor: '#ec5990',
-      borderRadius: 4,
-    },
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      paddingTop: Constants.statusBarHeight,
-      padding: 8,
-      backgroundColor: '#0e101c',
-    },
+    // container: {
+    //   flex: 1,
+    //   justifyContent: 'center',
+    //   paddingTop: Constants.statusBarHeight,
+    //   padding: 8,
+    //   backgroundColor: '#0e101c',
+    // },
     input: {
-      backgroundColor: '#10161d',
-      color: 'white',
-      height: 32,
-      padding: 10,
-      marginVertical: 3,
-      borderRadius: 7,
+        backgroundColor: '#151d30',
+        color: 'white',
+        height: 32,
+        width: 210,
+        padding: 10,
+        marginVertical: 3,
+        borderRadius: 7,
+        borderWidth: 0.3,
+        borderColor: "#f5c517"
     },
     button_container: {
         flexDirection: 'row',

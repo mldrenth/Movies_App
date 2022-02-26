@@ -26,7 +26,7 @@ const UserModal = ({user, setUpdatedUser}) => {
                 >
                 <View style={styles.centeredView}>
                   <View style={styles.modalView}>
-                    <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:15 }}>Edit User details</Text>
+                    <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:16 }}>Edit User details</Text>
                 
                     <UserForm user={user} setUpdatedUser={setUpdatedUser} closeModal={closeModal}/>
                 
@@ -46,6 +46,7 @@ const UserModal = ({user, setUpdatedUser}) => {
       marginLeft: 30
     },
     centeredView: {
+      backgroundColor: 'rgba(21, 29, 48, 0.8)',
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
@@ -53,8 +54,10 @@ const UserModal = ({user, setUpdatedUser}) => {
     },
     modalView: {
       margin: 20,
-      backgroundColor: "#151d30",
+      backgroundColor: "#060d17",
       borderRadius: 7,
+      borderWidth: 1,
+      borderColor: "#f5c517",
       padding: 35,
       alignItems: "center",
       elevation: 5
