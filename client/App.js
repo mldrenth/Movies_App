@@ -5,12 +5,14 @@ import { createBottomTabNavigator, createMaterialTopTabNavigator } from '@react-
 import HomeScreen from './screens/HomeScreen';
 import WatchlistScreen from './screens/WatchlistScreen';
 import FavouritesScreen from './screens/FavouritesScreen';
+import SearchScreen from './screens/SearchScreen';
 import { DefaultTheme, DarkTheme} from '@react-navigation/native';
 import UserScreen from './screens/UserScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import mt_logo from './assets/mt_logo.png'
 import { HeaderLogo, HeaderTitle } from './header/TopNavigator';
+
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
@@ -65,9 +67,9 @@ export default function App() {
                     iconName = focused ? "heart" : "heart-outline";
                   } else if (route.name === "User") {
                     iconName = focused ? "person" : "person-outline";
-                  } // else if (route.name === "Search") {
-                    // iconName = focused ? "search" : "search-outline";
-                  // }
+                  }  else if (route.name === "Search") {
+                    iconName = focused ? "search" : "search-outline";
+                  }
       
                   return <Ionicons name={iconName} size={size} color={color} />;
                 },
@@ -76,6 +78,7 @@ export default function App() {
               })}>
 
         <Tab.Screen name="Home" component={HomeScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
+        <Tab.Screen name="Search" component={SearchScreen}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="User" component={UserScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
