@@ -15,8 +15,10 @@ const FavouritesScreen = () => {
     useEffect(() => {
         getUserData()
         .then((userData) => {
+        
             setUsername(userData.username)
         })
+        // console.log(username)
     }, [])
 
 
