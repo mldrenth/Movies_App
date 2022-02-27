@@ -5,6 +5,14 @@ import {View, Text, FlatList, StyleSheet} from 'react-native'
 
 const UserDetail = ({user}) => {
 
+    const hidePassword = () => {
+        let hiddenString = ""
+        for (let char in user.password) {
+            hiddenString += "●"
+        }
+        return hiddenString
+    }
+
     return (
         <View style={styles.container}>
             <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:16 }}>User information</Text>
@@ -13,7 +21,7 @@ const UserDetail = ({user}) => {
             <Text style={styles.text}>Last Name: {user.lastName}</Text>
             <Text style={styles.text}>Phone No: {user.phoneNumber}</Text>
             <Text style={styles.text}>Email: {user.email}</Text>
-            <Text style={styles.text}>Password: {user.password}</Text>
+            <Text style={{color:"#b5b7b9", fontSize:10}}><Text style={styles.text}>Password:</Text> {hidePassword()}</Text>
         </View>
     ) 
 }

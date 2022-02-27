@@ -41,6 +41,18 @@ export const updateUser = (user) => {
     .then(res => res.json())
 }
 
+export const loginUser = (email, password) => {
+    return fetch(baseURL + "/login?email=" + email + "&password=" + password, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    // .then(res => {if( res ) {res.json()} else {return "Incorrect details"} })
+    // .then(res => console.log("I am response", res))
+    .then(res => res.json()) // backend comes with string null make it to be an object
+}
+
 export const removeMovieFromWatchlist = (movieId) => {
     
     return fetch(baseURL + "/1/watchlist/" + movieId, {

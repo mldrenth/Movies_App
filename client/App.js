@@ -12,8 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import mt_logo from './assets/mt_logo.png'
 import { HeaderLogo, HeaderTitle } from './header/TopNavigator';
-import LoginScreen from './login/Login';
-
+import LoginScreen from './login/LoginScreen';
 
 
 const myTheme = {
