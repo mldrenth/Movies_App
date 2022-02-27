@@ -30,6 +30,23 @@ public class UserController {
         return new ResponseEntity(userRepository.findById(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/users/login")
+    public ResponseEntity getUserByEmailAndPassword(
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password){
+        return new ResponseEntity(userRepository.findUserByEmailAndPassword(email, password), HttpStatus.OK);
+
+//        User result = userRepository.findUserByEmailAndPassword(email, password);
+//        System.out.println(result);
+//        if(result != null){
+//            return new ResponseEntity(result, HttpStatus.OK);
+//        } else {
+//            Object object = "Incorrect information";
+//            System.out.println(object);
+//            return new ResponseEntity(object, HttpStatus.OK);
+//        }
+    }
+
     @PostMapping(value = "/users")
     public ResponseEntity<User> postUser(@RequestBody User user) {
         userRepository.save(user);
@@ -56,7 +73,6 @@ public class UserController {
         userRepository.deleteById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
-
 
     @GetMapping(value = "users/{id}/watchlist")
     public ResponseEntity<List<Movie>> getAllMoviesInUsersWatchlist(@PathVariable Long id){
@@ -115,9 +131,4 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/users/{userId}/")
-
-    // post request to add movie to watchlist / favourites
-    // "/users/{userId}/watchlist". If movie exist in database, then add it to my fav If this does not exist in movie database, then create one
-    // "/users/{userId}/favourites"
 }

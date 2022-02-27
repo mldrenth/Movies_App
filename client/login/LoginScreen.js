@@ -2,6 +2,8 @@ import React, { useState }from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { useForm, Controller } from 'react-hook-form';
+import { loginUser } from '../services/UserServices';
 
  
 const LoginScreen = () => {
@@ -9,8 +11,12 @@ const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    return (
     
+    const onSubmit = () => loginUser(email, password).then(data => {
+        // Received data / user pass -setUser- to UserScreen.js
+    });
+
+    return (
         <View style={styles.container}>
             <Image style={styles.image} source = {require("../assets/mt_logo.png")}/>
             <Text style={{color:"#f5c517", fontWeight:"bold", fontSize:20, marginBottom: 30}}>Movie Time</Text>
@@ -35,9 +41,9 @@ const LoginScreen = () => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.loginBtn}>
+            <TouchableOpacity style={styles.loginBtn} onPress={onSubmit}>
                 <AntDesign name="login" size={30} color="#f5c517" />
-                <Text style={{color:"#f5c517", paddingTop:5}}>LOGIN</Text>
+                <Text style={{color:"#f5c517", paddingTop:5}} >LOGIN</Text>
             </TouchableOpacity>
 
         </View>
