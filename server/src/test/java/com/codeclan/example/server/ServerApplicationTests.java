@@ -1,6 +1,9 @@
 package com.codeclan.example.server;
 import com.codeclan.example.server.models.Movie;
+import com.codeclan.example.server.models.MovieUserRating;
+import com.codeclan.example.server.models.User;
 import com.codeclan.example.server.repositories.MovieRepository;
+import com.codeclan.example.server.repositories.MovieUserRatingRepository;
 import com.codeclan.example.server.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,6 +24,9 @@ class ServerApplicationTests {
 
 	@Autowired
 	MovieRepository movieRepository;
+
+	@Autowired
+	MovieUserRatingRepository movieUserRatingRepository;
 
 	@Test
 	void contextLoads() {
@@ -49,6 +55,18 @@ class ServerApplicationTests {
 	public void canFindUsersWatchlist(){
 		List<Movie> foundMovies = movieRepository.findMoviesUsersWatchlistById(1L);
 		assertEquals(1, foundMovies.size());
+	}
+
+	@Test
+	public void userCanCreateRating(){
+		User userToMakeRating = userRepository.findById(1L).get();
+		Movie movieToRate = movieRepository.findById(2L).get();
+		MovieUserRating rating = new MovieUserRating(movieToRate, userToMakeRating, 20);
+		movieUserRatingRepository.save(rating);
+		List<MovieUserRating> foundRatings = userToMakeRating.getRatings();
+		List<MovieUserRating> allRatings = movieUserRatingRepository.findAll();
+		assertEquals(2, foundRatings.size());
+		assertEquals(2, allRatings.size());
 	}
 
 }
