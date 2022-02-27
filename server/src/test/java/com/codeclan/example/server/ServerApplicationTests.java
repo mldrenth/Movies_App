@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @SpringBootTest
 class ServerApplicationTests {
@@ -69,4 +69,9 @@ class ServerApplicationTests {
 		assertEquals(2, allRatings.size());
 	}
 
+	@Test
+	public void canFindUserByEmailAndPassword(){
+		User foundUser = userRepository.findUserByEmailAndPassword("fiona.g@gmail.com", "888");
+		assertEquals("Fiona", foundUser.getFirstName());
+	}
 }
