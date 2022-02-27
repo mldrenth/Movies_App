@@ -1,7 +1,9 @@
 package com.codeclan.example.server.components;
 import com.codeclan.example.server.models.Genre;
+import com.codeclan.example.server.models.MovieUserRating;
 import com.codeclan.example.server.models.User;
 import com.codeclan.example.server.repositories.GenreRepository;
+import com.codeclan.example.server.repositories.MovieUserRatingRepository;
 import com.codeclan.example.server.repositories.UserRepository;
 import com.codeclan.example.server.models.Movie;
 import com.codeclan.example.server.repositories.MovieRepository;
@@ -24,6 +26,9 @@ public class DataLoader implements ApplicationRunner  {
 
     @Autowired
     GenreRepository genreRepository;
+
+    @Autowired
+    MovieUserRatingRepository movieUserRatingRepository;
 
     public DataLoader() {
     }
@@ -141,6 +146,15 @@ public class DataLoader implements ApplicationRunner  {
         movieRepository.save(movie1);
         movieRepository.save(movie2);
         movieRepository.save(movie3);
+
+
+        MovieUserRating rating = new MovieUserRating(movie1, user1, 10);
+        movieUserRatingRepository.save(rating);
+
+
+
+//        movieRepository.save(movie1);
+//        userRepository.save(user1);
     }
 
 }

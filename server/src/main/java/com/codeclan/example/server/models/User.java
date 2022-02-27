@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersFavourites", "usersWatchlist"})
+    @JsonIgnoreProperties({"usersFavourites", "usersWatchlist", "ratings"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesFavourites",
@@ -46,7 +46,7 @@ public class User {
     private List<Movie> moviesFavourites;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersWatchlist", "usersFavourites"})
+    @JsonIgnoreProperties({"usersWatchlist", "usersFavourites", "ratings"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesWatchlist",
@@ -63,8 +63,12 @@ public class User {
     )
     private List<Movie> moviesWatchlist;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"users"})
+    private List<MovieUserRating> ratings;
 
-    // friends(List of Users)   // TODO
+
+// friends(List of Users)   // TODO
 
 
     public User(String username, String firstName, String lastName, String phoneNumber, String email, String password) {
@@ -76,11 +80,14 @@ public class User {
         this.password = password;
         this.moviesFavourites = new ArrayList<Movie>();
         this.moviesWatchlist = new ArrayList<Movie>();
+        this.ratings = new ArrayList<>();
     }
 
     // POJO
     public User() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -168,6 +175,20 @@ public class User {
 
     public void removeMovieFromWatchlist(Movie movie) {
         this.moviesWatchlist.remove(movie);
+    }
+
+    public List<MovieUserRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<MovieUserRating> ratings) {
+        this.ratings = ratings;
+    }
+
+
+
+    public void addRatingToRatings(MovieUserRating rating) {
+        this.ratings.add(rating);
     }
 
 }
