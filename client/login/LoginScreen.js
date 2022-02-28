@@ -19,6 +19,7 @@ const LoginScreen = ({handleLogin}) => {
         } else {
             setIncorrectPassword(true)
         }
+        // Received data / user pass -setUser- to UserScreen.js
     })
 
     return (

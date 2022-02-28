@@ -46,7 +46,10 @@ export default function App() {
 
   const handleLogin = () => {
     setIsLoggedIn(true)
-    console.log(isLoggedIn);
+  }
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
   }
 
   const colorScheme = useColorScheme();
@@ -84,7 +87,7 @@ export default function App() {
         <Tab.Screen name="Search" component={SearchScreen}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
-        <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
+        <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser} handleLogout={handleLogout}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         </>  :
         <Tab.Screen name="Login" children={() => <LoginScreen handleLogin={handleLogin}/>}/>
         }
