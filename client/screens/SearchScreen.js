@@ -1,7 +1,8 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect, useState, useCallback} from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, TextInput } from 'react-native';
 import MovieSearchList from '../components/MovieSearchList';
 import { getMoviesByName } from '../services/MovieApiServices';
+import debounce from 'lodash.debounce';
 
 
 const SearchScreen = () => {
@@ -9,17 +10,24 @@ const SearchScreen = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchedMovies, setSearchedMovies] = useState([]);
     
+    //Reworked to optimize search
 
-    useEffect(() => {
-        getMoviesByName(searchTerm).then((searchResults) => {
-          setSearchedMovies(searchResults.results);
-        });
-        
-      },[searchTerm])
+    const debouncedSave = useCallback(
+      debounce(nextValue => getMoviesByName(nextValue).then((searchResults) => {
+              setSearchedMovies(searchResults.results);
+              console.log(searchTerm)
+            }), 500),
+      [], 
+    );
+
+    const handleSearch = (data) => {
+      setSearchTerm(data)
+      debouncedSave(data)
+    }
 
     return (
         <View style={styles.container} >
-        <TextInput style={styles.input} onChangeText={setSearchTerm} placeholder="Search" clearButtonMode='always'></TextInput>
+        <TextInput style={styles.input} onChangeText={handleSearch} placeholder="Search" clearButtonMode='always'></TextInput>
         <MovieSearchList movies={searchedMovies}/>
         </View>
 
