@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect} from 'react';
+import { getUserData } from './services/UserServices';
 import { Text, View, useColorScheme, Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator, createMaterialTopTabNavigator } from '@react-navigation/bottom-tabs';
@@ -28,63 +30,69 @@ const myTheme = {
 };
 
 
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-
 const Tab = createBottomTabNavigator();
 
 export default function App() {
 
+  const [user, setUser] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+      getUserData()
+      .then((userData) => {
+          setUser(userData)
+      })
+  }, [])
+
+  const handleLogin = () => {
+    setIsLoggedIn(true)
+  }
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+  }
+
   const colorScheme = useColorScheme();
 
   return (
-    
-  
     <NavigationContainer theme={myTheme}>
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
 
       <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-      
-                  if (route.name === "Home") {
-                    iconName = focused ? "home" : "home-outline";
-                  } else if (route.name === "Watchlist") {
-                    iconName = focused ? "bookmark" : "bookmark-outline";
-                  } else if (route.name === "Favourites") {
-                    iconName = focused ? "heart" : "heart-outline";
-                  } else if (route.name === "User") {
-                    iconName = focused ? "person" : "person-outline";
-                  }  else if (route.name === "Search") {
-                    iconName = focused ? "search" : "search-outline";
-                  }
-      
-                  return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                // tabBarActiveTintColor: "#f5c517",
-                // tabBarInactiveTintColor: "gray",
-              })}>
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Watchlist") {
+              iconName = focused ? "bookmark" : "bookmark-outline";
+            } else if (route.name === "Favourites") {
+              iconName = focused ? "heart" : "heart-outline";
+            } else if (route.name === "User") {
+              iconName = focused ? "person" : "person-outline";
+            }  else if (route.name === "Search") {
+              iconName = focused ? "search" : "search-outline";
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          // tabBarActiveTintColor: "#f5c517",
+          // tabBarInactiveTintColor: "gray",
+        })}>
+          
+        {isLoggedIn ? 
+        <>
         <Tab.Screen name="Home" component={HomeScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Search" component={SearchScreen}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
-        <Tab.Screen name="User" component={UserScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
-      
-        <Tab.Screen name="Login" component={LoginScreen}/>
-
+        <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser} handleLogout={handleLogout}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
+        </>  :
+        <Tab.Screen name="Login" children={() => <LoginScreen handleLogin={handleLogin}/>}/>
+        }
       </Tab.Navigator>
       
-
-
     </NavigationContainer>
   );
 }

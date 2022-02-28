@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import UserForm from '../components/UserForm';
 
 
-const UserModal = ({user, setUpdatedUser}) => {
+const UserModal = ({user, setUpdatedUser, handleLogout}) => {
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -35,6 +35,9 @@ const UserModal = ({user, setUpdatedUser}) => {
             </Modal>
 
             <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} />
+
+            <FontAwesome name="power-off" size={30} color="#f5c517" onPress={() => handleLogout()}/>
+
 
         </View>
     );

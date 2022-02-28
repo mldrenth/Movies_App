@@ -34,17 +34,11 @@ public class UserController {
     public ResponseEntity getUserByEmailAndPassword(
             @RequestParam(name = "email") String email,
             @RequestParam(name = "password") String password){
-        return new ResponseEntity(userRepository.findUserByEmailAndPassword(email, password), HttpStatus.OK);
-
-//        User result = userRepository.findUserByEmailAndPassword(email, password);
-//        System.out.println(result);
-//        if(result != null){
-//            return new ResponseEntity(result, HttpStatus.OK);
-//        } else {
-//            Object object = "Incorrect information";
-//            System.out.println(object);
-//            return new ResponseEntity(object, HttpStatus.OK);
-//        }
+        User result = userRepository.findUserByEmailAndPassword(email, password);
+        if(result != null){
+            return new ResponseEntity(result, HttpStatus.OK);
+        }
+        return new ResponseEntity ("Error", HttpStatus.UNAUTHORIZED);
     }
 
     @PostMapping(value = "/users")

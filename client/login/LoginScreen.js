@@ -2,19 +2,25 @@ import React, { useState }from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
-import { useForm, Controller } from 'react-hook-form';
 import { loginUser } from '../services/UserServices';
 
  
-const LoginScreen = () => {
+const LoginScreen = ({handleLogin}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [incorrectPassword, setIncorrectPassword] = useState(null);
 
-    
+
     const onSubmit = () => loginUser(email, password).then(data => {
+        if(data){
+            handleLogin()
+            // console.log("I am data", data); /// send a user back to app.js
+        } else {
+            setIncorrectPassword(true)
+        }
         // Received data / user pass -setUser- to UserScreen.js
-    });
+    })
 
     return (
         <View style={styles.container}>
@@ -40,6 +46,7 @@ const LoginScreen = () => {
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
+            {incorrectPassword ? <Text style={{color:"#b5b7b9", marginBottom:15}}>Incorrect Email or Password</Text> : null}
 
             <TouchableOpacity style={styles.loginBtn} onPress={onSubmit}>
                 <AntDesign name="login" size={30} color="#f5c517" />
@@ -57,8 +64,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     image: {
-        height: 60,
-        width: 80,
+        height: 67,
+        width: 90,
         marginBottom: 5
     },
     textInput: {

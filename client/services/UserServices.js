@@ -48,9 +48,9 @@ export const loginUser = (email, password) => {
             'Content-Type': 'application/json'
         }
     })
-    // .then(res => {if( res ) {res.json()} else {return "Incorrect details"} })
-    // .then(res => console.log("I am response", res))
-    .then(res => res.json()) // backend comes with string null make it to be an object
+    .then(res => res.json()) 
+    .catch((error) => console.log(error)) 
+    // backend comes with string null, make it to be an object
 }
 
 export const removeMovieFromWatchlist = (movieId) => {

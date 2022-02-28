@@ -1,23 +1,20 @@
 import {React, useState, useEffect} from 'react';
-import { getUserData, updateUser } from '../services/UserServices';
-import {View, Text, FlatList, StyleSheet} from 'react-native'
+import { View } from 'react-native'
 import UserDetail from '../components/UserDetail';
-import UserForm from '../components/UserForm';
 import UserModal from '../components/UserModal';
-import { FontAwesome } from '@expo/vector-icons'; 
 
 
-const UserScreen = () => {
+const UserScreen = ({user, setUser, handleLogout}) => {
 
-    const [user, setUser] = useState("");
-    const [editUser, setEditUser] = useState(false);
+    // const [user, setUser] = useState("");
+    // // const [editUser, setEditUser] = useState(false);
 
-    useEffect(() => {
-        getUserData()
-        .then((userData) => {
-            setUser(userData)
-        })
-    }, [])
+    // useEffect(() => {
+    //     getUserData()
+    //     .then((userData) => {
+    //         setUser(userData)
+    //     })
+    // }, [])
 
     const setUpdatedUser = (user) => {
         setUser(user)
@@ -26,7 +23,7 @@ const UserScreen = () => {
     return (
         <View>
             <UserDetail user={user}/>
-            <UserModal user={user} setUpdatedUser={setUpdatedUser}/>
+            <UserModal user={user} setUpdatedUser={setUpdatedUser} handleLogout={handleLogout}/>
         </View>
     )   
 }
