@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { loginUser } from '../services/UserServices';
 
  
-const LoginScreen = () => {
+const LoginScreen = ({handleLogin}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,12 +14,11 @@ const LoginScreen = () => {
 
     const onSubmit = () => loginUser(email, password).then(data => {
         if(data){
-            // setUser(data)
-            console.log("I am data", data); /// send a user back to app.js
+            handleLogin()
+            // console.log("I am data", data); /// send a user back to app.js
         } else {
             setIncorrectPassword(true)
         }
-        // Received data / user pass -setUser- to UserScreen.js
     })
 
     return (

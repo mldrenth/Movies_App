@@ -30,21 +30,12 @@ const myTheme = {
 };
 
 
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-
 const Tab = createBottomTabNavigator();
 
 export default function App() {
 
   const [user, setUser] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
       getUserData()
@@ -53,6 +44,10 @@ export default function App() {
       })
   }, [])
 
+  const handleLogin = () => {
+    setIsLoggedIn(true)
+    console.log(isLoggedIn);
+  }
 
   const colorScheme = useColorScheme();
 
@@ -61,39 +56,40 @@ export default function App() {
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
 
       <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-      
-                  if (route.name === "Home") {
-                    iconName = focused ? "home" : "home-outline";
-                  } else if (route.name === "Watchlist") {
-                    iconName = focused ? "bookmark" : "bookmark-outline";
-                  } else if (route.name === "Favourites") {
-                    iconName = focused ? "heart" : "heart-outline";
-                  } else if (route.name === "User") {
-                    iconName = focused ? "person" : "person-outline";
-                  }  else if (route.name === "Search") {
-                    iconName = focused ? "search" : "search-outline";
-                  }
-      
-                  return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                // tabBarActiveTintColor: "#f5c517",
-                // tabBarInactiveTintColor: "gray",
-              })}>
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Watchlist") {
+              iconName = focused ? "bookmark" : "bookmark-outline";
+            } else if (route.name === "Favourites") {
+              iconName = focused ? "heart" : "heart-outline";
+            } else if (route.name === "User") {
+              iconName = focused ? "person" : "person-outline";
+            }  else if (route.name === "Search") {
+              iconName = focused ? "search" : "search-outline";
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          // tabBarActiveTintColor: "#f5c517",
+          // tabBarInactiveTintColor: "gray",
+        })}>
+          
+        {isLoggedIn ? 
+        <>
         <Tab.Screen name="Home" component={HomeScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Search" component={SearchScreen}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
-      
-        <Tab.Screen name="Login" component={LoginScreen}/>
-
+        </>  :
+        <Tab.Screen name="Login" children={() => <LoginScreen handleLogin={handleLogin}/>}/>
+        }
       </Tab.Navigator>
       
-
     </NavigationContainer>
   );
 }
