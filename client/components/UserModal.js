@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
-import { FontAwesome } from '@expo/vector-icons'; 
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from "react-native";
+import { AntDesign } from '@expo/vector-icons'; 
 import UserForm from '../components/UserForm';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
 const UserModal = ({user, setUpdatedUser, handleLogout}) => {
@@ -34,10 +35,20 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
                 </View>
             </Modal>
 
-            <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} />
+            {/* <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} /> */}
+            
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <MaterialCommunityIcons name="account-edit-outline" size={32} color="#f5c517" />
+            </TouchableOpacity>
 
-            <FontAwesome name="power-off" size={30} color="#f5c517" onPress={() => handleLogout()}/>
-
+            <TouchableOpacity style={styles.button} onPress={() => handleLogout()}>
+              <View style={{alignItems:"center"}}>
+                <AntDesign name="logout" size={30} color="#f5c517" />
+                <Text style={{color:"#f5c517", paddingTop:5}} >LOGOUT</Text>
+              </View>
+            </TouchableOpacity>
+            
+            {/* <FontAwesome name="power-off" size={30} color="#f5c517" onPress={() => handleLogout()}/> */}
 
         </View>
     );
@@ -64,6 +75,12 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
       padding: 35,
       alignItems: "center",
       elevation: 5
+    },
+    button: {
+      marginTop: 200,
+      marginRight: 30,
+      flexDirection: 'row',
+      justifyContent: 'center',
     }
   });
 
