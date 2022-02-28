@@ -41,7 +41,6 @@ public class MovieController {
 //        movieToUpdate.setAverageRating(movie.getAverageRating());
 //        movieToUpdate.setReleaseDate(movie.getReleaseDate());
 //        movieToUpdate.setPopularity(movie.getPopularity());
-        movieToUpdate.setUserRating(movie.getUserRating());
 //        movieToUpdate.setIdFromApi(movie.getIdFromApi());
 //        movieToUpdate.setVideo(movie.getVideo());
 //        movieToUpdate.setUsersFavourites(movie.getUsersFavourites());

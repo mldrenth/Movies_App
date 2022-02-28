@@ -48,15 +48,13 @@ public class Movie {
     private String releaseDate;
     @Column(name = "popularity")
     private double popularity;
-    @Column(name = "userRating")
-    private int userRating;
     @Column(name = "idFromApi")
     private int idFromApi;
     @Column(name = "video")
     private String video;
 
     @ManyToMany
-    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist"})
+    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist", "ratings"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesFavourites",
@@ -74,7 +72,7 @@ public class Movie {
     private List<User> usersFavourites;
 
     @ManyToMany
-    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist"})
+    @JsonIgnoreProperties({"moviesFavourites", "moviesWatchlist", "ratings"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesWatchlist",
@@ -91,8 +89,11 @@ public class Movie {
     )
     private List<User> usersWatchlist;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"ratings"})
+    private List<MovieUserRating> ratings;
 
-    public Movie(String posterPath, String backdropPath, String title, List<Genre> genres, String overview, double voteAverage, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
+    public Movie(String posterPath, String backdropPath, String title, List<Genre> genres, String overview, double voteAverage, String releaseDate, double popularity, int idFromApi, String video) {
         this.posterPath = posterPath;
         this.backdropPath = backdropPath;
         this.title = title;
@@ -101,16 +102,18 @@ public class Movie {
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.popularity = popularity;
-        this.userRating = userRating;
         this.idFromApi = idFromApi;
         this.video = video;
         this.usersFavourites = new ArrayList<User>();
         this.usersWatchlist = new ArrayList<User>();
+        this.ratings = new ArrayList<>();
     }
 
     // POJO
     public Movie() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -184,13 +187,6 @@ public class Movie {
         this.popularity = popularity;
     }
 
-    public int getUserRating() {
-        return userRating;
-    }
-
-    public void setUserRating(int userRating) {
-        this.userRating = userRating;
-    }
 
     public int getIdFromApi() {
         return idFromApi;
@@ -232,4 +228,11 @@ public class Movie {
         this.usersFavourites.add(user);
     }
 
+    public List<MovieUserRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<MovieUserRating> ratings) {
+        this.ratings = ratings;
+    }
 }

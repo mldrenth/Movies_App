@@ -19,7 +19,7 @@ public class UserTests {
 
     @Before
     public void before() {
-        user1 = new User("Fiona", "fiona.g@gmail.com", "888");
+        user1 = new User("FionaG", "Fiona", "Graham", "+447366258836", "fiona.g@gmail.com", "888");
 
         action = new Genre(28, "Action");
         adventure = new Genre(12, "Adventure");
@@ -31,13 +31,28 @@ public class UserTests {
                 "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
                 "Spider-Man: No Way Home", genres,
                 "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-                8.3, "2021-12-15", 9805.303, 7,
+                8.3, "2021-12-15", 9805.303,
                 634649, "Bh8NeyejykU");
     }
 
     @Test
-    public void hasName() {
-        assertEquals("Fiona", user1.getUsername());
+    public void hasUserName() {
+        assertEquals("FionaG", user1.getUsername());
+    }
+
+    @Test
+    public void hasFirstName() {
+        assertEquals("Fiona", user1.getFirstName());
+    }
+
+    @Test
+    public void hasLastName() {
+        assertEquals("Graham", user1.getLastName());
+    }
+
+    @Test
+    public void hasPhoneNumber() {
+        assertEquals("+447366258836", user1.getPhoneNumber());
     }
 
     @Test

@@ -30,6 +30,17 @@ public class UserController {
         return new ResponseEntity(userRepository.findById(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/users/login")
+    public ResponseEntity getUserByEmailAndPassword(
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password){
+        User result = userRepository.findUserByEmailAndPassword(email, password);
+        if(result != null){
+            return new ResponseEntity(result, HttpStatus.OK);
+        }
+        return new ResponseEntity ("Error", HttpStatus.UNAUTHORIZED);
+    }
+
     @PostMapping(value = "/users")
     public ResponseEntity<User> postUser(@RequestBody User user) {
         userRepository.save(user);
@@ -40,6 +51,9 @@ public class UserController {
     public ResponseEntity<User> putUser(@RequestBody User user, @PathVariable Long id) {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         // userToUpdate.setMoviesFavourites(user.getMoviesFavourites());
@@ -53,7 +67,6 @@ public class UserController {
         userRepository.deleteById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
-
 
     @GetMapping(value = "users/{id}/watchlist")
     public ResponseEntity<List<Movie>> getAllMoviesInUsersWatchlist(@PathVariable Long id){
@@ -94,9 +107,22 @@ public class UserController {
         return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
 
-//    @GetMapping(value = "/users/{userId}/")
+    @DeleteMapping(value = "users/{id}/watchlist/{movieId}")
+    public ResponseEntity<Movie> removeMovieFromWatchlist(@PathVariable Long id, @PathVariable Long movieId){
+        User userToRemoveMovieFrom = userRepository.findById(id).get();
+        Movie movieToRemove = movieRepository.getById(movieId);
+        userToRemoveMovieFrom.removeMovieFromWatchlist(movieToRemove);
+        userRepository.save(userToRemoveMovieFrom);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
-    // post request to add movie to watchlist / favourites
-    // "/users/{userId}/watchlist". If movie exist in database, then add it to my fav If this does not exist in movie database, then create one
-    // "/users/{userId}/favourites"
+    @DeleteMapping(value = "users/{id}/favourites/{movieId}")
+    public ResponseEntity<Movie> removeMovieFromFavourites(@PathVariable Long id, @PathVariable Long movieId){
+        User userToRemoveMovieFrom = userRepository.findById(id).get();
+        Movie movieToRemove = movieRepository.getById(movieId);
+        userToRemoveMovieFrom.removeMovieFromFavourites(movieToRemove);
+        userRepository.save(userToRemoveMovieFrom);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 }

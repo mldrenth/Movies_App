@@ -10,6 +10,12 @@ const WatchlistScreen = () => {
     const [moviesWatchlist, setMoviesWatchlist] = useState([]);
     const isFocused = useIsFocused();
 
+    const removeMovieState = (idToDelete) => {
+        const newMoviesWatchlist = [...moviesWatchlist]
+        const result = newMoviesWatchlist.filter((movie) => movie.id !== idToDelete)
+        setMoviesWatchlist(result)
+      };
+
     useEffect(() => {
         getUserData()
         .then((userData) => {
@@ -19,8 +25,7 @@ const WatchlistScreen = () => {
     
     return (
         <View>
-            <Text style={{ color:"#f5c517", paddingLeft:10, fontWeight:"bold" }}> Watchlist Screen</Text>
-            <MovieCardList movies={moviesWatchlist}/>
+            <MovieCardList removeMovieState={removeMovieState} movies={moviesWatchlist}/>
         </View>
 
     )
