@@ -4,34 +4,33 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
 import MovieCardList from '../components/MovieCardList';
 import { useIsFocused } from "@react-navigation/native";
+import { useIsMounted } from '../components/Mounthelper';
 
 const FavouritesScreen = () => {
 
-    const [username, setUsername] = useState("");
     const [moviesFavourites, setMoviesFavourites] = useState([]);
 
     const isFocused = useIsFocused();
+    const isMounted = useIsMounted();
+
+    const removeMovieState = (idToDelete) => {
+        const newMoviesFavourites = [...moviesFavourites]
+        const result = newMoviesFavourites.filter((movie) => movie.id !== idToDelete)
+        setMoviesFavourites(result)
+      };
 
     useEffect(() => {
         getUserData()
         .then((userData) => {
-        
-            setUsername(userData.username)
+            if (isMounted.current){
+            setMoviesFavourites(userData.moviesFavourites)}
         })
-        // console.log(username)
-    }, [])
+    }, [isFocused])
 
-
-    useEffect(() => {
-        getUserData()
-        .then((userData) => {
-            setMoviesFavourites(userData.moviesFavourites)
-        })
-    }, [isFocused, moviesFavourites])
-
+    
     return (
         <View>
-            <MovieCardList movies={moviesFavourites}/>
+            <MovieCardList removeMovieState={removeMovieState} movies={moviesFavourites}/>
         </View>
     )
     

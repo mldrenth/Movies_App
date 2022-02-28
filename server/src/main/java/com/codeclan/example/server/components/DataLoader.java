@@ -102,7 +102,7 @@ public class DataLoader implements ApplicationRunner  {
                 "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
                 "Spider-Man: No Way Home", genres_movie1,
                 "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-                8.3, "2021-12-15", 9805.303, 8,
+                8.3, "2021-12-15", 9805.303,
                 634649, "Bh8NeyejykU");
         movieRepository.save(movie1);
 
@@ -112,7 +112,7 @@ public class DataLoader implements ApplicationRunner  {
                 "/c6H7Z4u73ir3cIoCteuhJh7UCAR.jpg",
                 "Eternals", genres_movie2,
                 "The Eternals are a team of ancient aliens who have been living on Earth in secret for thousands of years. When an unexpected tragedy forces them out of the shadows, they are forced to reunite against mankind’s most ancient enemy, the Deviants.",
-                7.2, "2021-11-03", 2838.001, 7,
+                7.2, "2021-11-03", 2838.001,
                 524434, "video");
         movieRepository.save(movie2);
 
@@ -122,7 +122,7 @@ public class DataLoader implements ApplicationRunner  {
                 "/dK12GIdhGP6NPGFssK2Fh265jyr.jpg",
                 "Red Notice", genres_movie3,
                 "An Interpol-issued Red Notice is a global alert to hunt and capture the world's most wanted. But when a daring heist brings together the FBI's top profiler and two rival criminals, there's no telling what will happen.",
-                6.8, "2021-11-04", 2022.397, 7,
+                6.8, "2021-11-04", 2022.397,
                 512195, "video");
         movieRepository.save(movie3);
 
