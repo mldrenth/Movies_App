@@ -89,7 +89,7 @@ export default function App() {
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser} handleLogout={handleLogout}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         </>  :
-        <Tab.Screen name="Login" children={() => <LoginScreen handleLogin={handleLogin}/>}/>
+        <Tab.Screen name="Login" children={() => <LoginScreen handleLogin={handleLogin}/>} options={{ headerShown: false, tabBarStyle: { display: "none" } }}/>
         }
       </Tab.Navigator>
       

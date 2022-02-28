@@ -67,15 +67,21 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
                 <Text style={{fontSize:20, color:"#fcfdfd", fontWeight:"bold"}}>{title}</Text>
                 <Text style={{fontSize:20, color:"#b5b7b9", marginBottom: 10}}>({releaseDate.substring(0, 4)})</Text>
                 <Text style={{marginBottom:10, color:"#575c61"}}>{overview.substring(0, 100) + "..."}</Text>
-                <Text style={{marginBottom:10, fontSize:17}}> 
-                    <FontAwesome name="imdb" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {voteAverage}</Text>
-                </Text>
-            
-            {specificRating?    <Text style={{fontSize:17}}>
-                    <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {specificRating}</Text> 
-                </Text> : null}
+                
+                <View style={styles.rating}>
+                    <Text style={{marginBottom:10, fontSize:17}}> 
+                        <FontAwesome name="imdb" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {voteAverage}    </Text>
+                    </Text>
+                
+                    {specificRating? 
+
+                    <Text style={{fontSize:17}}>
+                        <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {specificRating}</Text> 
+                    </Text> : null}
+                </View>
+
                 <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-               {userHasMovieWatchlist ? <MaterialCommunityIcons name="bookmark-remove-outline" size={30} color="#f5c517" onPress={handleRemoveWatchlist} /> : null}
+                {userHasMovieWatchlist ? <MaterialCommunityIcons name="bookmark-remove-outline" size={30} color="#f5c517" onPress={handleRemoveWatchlist} /> : null}
                 {userHasMovieFavourites ? <MaterialCommunityIcons name="heart-remove-outline" size={30} color="#f5c517" onPress={handleRemoveFavourites} /> : null }
                 </View>
             </View>
@@ -92,8 +98,10 @@ const styles = StyleSheet.create({
         width: 200,
         borderBottomLeftRadius: 7,
         borderTopLeftRadius: 7
-      }
-
+    },
+    rating: {
+        flexDirection: 'row'
+    }
 });
 
 export default MovieCard;
