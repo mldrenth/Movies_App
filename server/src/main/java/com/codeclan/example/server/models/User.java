@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersFavourites", "usersWatchlist", "ratings"})
+    @JsonIgnoreProperties({"usersFavourites", "usersWatchlist", "ratings", "genres"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesFavourites",
@@ -46,7 +46,7 @@ public class User {
     private List<Movie> moviesFavourites;
 
     @ManyToMany
-    @JsonIgnoreProperties({"usersWatchlist", "usersFavourites", "ratings"})
+    @JsonIgnoreProperties({"usersWatchlist", "usersFavourites", "ratings", "genres"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "users_moviesWatchlist",

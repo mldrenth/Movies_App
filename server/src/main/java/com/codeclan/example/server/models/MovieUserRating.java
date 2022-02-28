@@ -15,7 +15,7 @@ public class MovieUserRating{
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"ratings", "usersFavourites", "usersWatchlist"})
+    @JsonIgnoreProperties({"ratings", "usersFavourites", "usersWatchlist", "genres"})
     private Movie movie;
 
     @ManyToOne

@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Button, TextInput } from 'react-native';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,10 +10,13 @@ import { addMovieToFavourites, addMovieToWatchlist, removeMovieFromWatchlist, re
 import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from '../services/UserServices';
 import { getAllGenres } from '../services/GenreServices';
+import { addNewRating } from '../services/RatingServices';
 
 
 const MovieDetailScreen = () => {
 
+  const [currentUser, setCurrentUser] = useState({});
+  const [rating, setRating] = useState(null);
   const [youtubeKey, setYoutubeKey] = useState("");
   const route = useRoute();
   const { id, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating } = route.params;
@@ -31,6 +34,7 @@ const MovieDetailScreen = () => {
   useEffect(() => {
     getUserData()
       .then((userData) => {
+        setCurrentUser(userData);
         setUserMoviesWatchlist(userData.moviesWatchlist)
         setUserMoviesFavourites(userData.moviesFavourites)
         if (userData.moviesWatchlist.map((movie) => movie.idFromApi).includes(id)) {
@@ -129,6 +133,35 @@ const MovieDetailScreen = () => {
     setUserHasMovieWatchlist(true)
   }
 
+  const handleRating = () => {
+    addNewRating({
+      movie:{
+      posterPath: posterPath,
+      backdropPath: backdropPath,
+      title: title,
+      genres: movieGenres,
+      overview: overview,
+      voteAverage: voteAverage,
+      releaseDate: releaseDate,
+      popularity: popularity,
+      idFromApi: id,
+      video: youtubeKey
+      },
+      user: {
+        id: currentUser.id,
+        username: currentUser.username,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        phoneNumber: currentUser.phoneNumber,
+        email: currentUser.email,
+        password: currentUser.password
+      },
+      rating: rating
+    })
+
+  }
+
+
   const handleRemoveWatchlist = () => {
     removeMovieFromWatchlist(idFromDb)
     setUserHasMovieWatchlist(false)
@@ -161,6 +194,15 @@ const MovieDetailScreen = () => {
             <TouchableHighlight onPress={handleSaveFavourites}>
               <Ionicons name="heart" size={32} color="#8a8d98" />
             </TouchableHighlight>}
+            
+
+        </View>
+        <View style={styles.container}>
+        <Text style={{ color: "#f5c517" }}>Leave a Rating</Text>
+        <TextInput style={styles.input} keyboardType={'number-pad'} maxLength={1} onChangeText={setRating}></TextInput>
+            <TouchableHighlight onPress={handleRating}>
+              <Ionicons name="star" size={32} color="#8a8d98" />
+            </TouchableHighlight>
         </View>
         {youtubeKey ? <View style={{ flex: 1 }}>
           <Text style={{ color: "#f5c517" }}>Trailer</Text>
@@ -212,5 +254,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  input: {
+    backgroundColor: '#151D30',
+    width: '10%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    borderColor: '#f5c517',
+    color: '#b5b7b9',
+    marginRight: 10,
+    marginLeft: 20
+  },
+  container: {
+    marginTop: 10,
+    flexDirection: 'row',
+    padding: 10,
+    alignSelf: 'center',
+    alignItems: 'center'
+  }
 
 });
