@@ -25,7 +25,6 @@ const HomeScreenList = ({}) => {
           setMoviesFavourites(userData.moviesFavourites)
           const favouriteLength = userData.moviesFavourites.length;
           const randomIndex = Math.floor(Math.random() * favouriteLength);
-          console.log(randomIndex)
           if (favouriteLength !== 0) {
           setRandomFavourite(userData.moviesFavourites[randomIndex])
           getRecommendedMovies(userData.moviesFavourites[randomIndex].idFromApi).then((movies) => setRecommendedMovies(movies.results))

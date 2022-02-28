@@ -4,36 +4,59 @@ import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-web';
 import { getUserData, removeMovieFromWatchlist, removieMovieFromFavourites } from '../services/UserServices';
 import { useIsFocused } from "@react-navigation/native";
+import { useIsMounted } from './Mounthelper';
+import { getRatingByMovieAndUserId } from '../services/RatingServices';
 
-const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating, genres, video}) => {
+
+const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating, genres, video, removeMovieState, item}) => {
 
     const [userHasMovieWatchlist, setUserHasMovieWatchlist] = useState(false);
     const [userHasMovieFavourites, setUserHasMovieFavourites] = useState(false);
     const isFocused = useIsFocused();
 
+    const isMounted = useIsMounted();
+
+    const [specificRating, setSpecificRating] = useState(null)
+
     const baseUrl = {uri: "https://image.tmdb.org/t/p/w500/" + posterPath};
+
+    useEffect(() => {
+        getRatingByMovieAndUserId(id,1)
+        .then((ratingInfo) => { 
+            if (ratingInfo != null) {
+            setSpecificRating(ratingInfo.rating)}
+        } )
+
+    }, [isFocused])
 
     useEffect(() => {
         getUserData()
         .then((userData) => {
+            if (isMounted.current) {
             if (userData.moviesWatchlist.map((movie) => movie.idFromApi).includes(idFromApi) ) {
               setUserHasMovieWatchlist(true);
             }
   
             if(userData.moviesFavourites.map((movie) => movie.idFromApi).includes(idFromApi)){
               setUserHasMovieFavourites(true);
-            }
+            }}
             
         })
         
     }, [isFocused])
 
+    console.log(specificRating)
+    
+
     const handleRemoveWatchlist = () => {
         removeMovieFromWatchlist(id)
+        removeMovieState(id)
     }
 
     const handleRemoveFavourites = () => {
         removieMovieFromFavourites(id)
+        removeMovieState(id)
+    
     }
 
     return (
@@ -48,9 +71,10 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
                 <Text style={{marginBottom:10, fontSize:17}}> 
                     <FontAwesome name="imdb" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {voteAverage}</Text>
                 </Text>
-                <Text style={{fontSize:17}}>
-                    <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {userRating}</Text> 
-                </Text>
+            
+            {specificRating?    <Text style={{fontSize:17}}>
+                    <FontAwesome name="star" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {specificRating}</Text> 
+                </Text> : null}
                 <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
                {userHasMovieWatchlist ? <MaterialCommunityIcons name="bookmark-remove-outline" size={30} color="#f5c517" onPress={handleRemoveWatchlist} /> : null}
                 {userHasMovieFavourites ? <MaterialCommunityIcons name="heart-remove-outline" size={30} color="#f5c517" onPress={handleRemoveFavourites} /> : null }

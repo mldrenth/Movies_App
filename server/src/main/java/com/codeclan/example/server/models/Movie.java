@@ -48,8 +48,6 @@ public class Movie {
     private String releaseDate;
     @Column(name = "popularity")
     private double popularity;
-    @Column(name = "userRating")
-    private int userRating;
     @Column(name = "idFromApi")
     private int idFromApi;
     @Column(name = "video")
@@ -95,7 +93,7 @@ public class Movie {
     @JsonIgnoreProperties({"ratings"})
     private List<MovieUserRating> ratings;
 
-    public Movie(String posterPath, String backdropPath, String title, List<Genre> genres, String overview, double voteAverage, String releaseDate, double popularity, int userRating, int idFromApi, String video) {
+    public Movie(String posterPath, String backdropPath, String title, List<Genre> genres, String overview, double voteAverage, String releaseDate, double popularity, int idFromApi, String video) {
         this.posterPath = posterPath;
         this.backdropPath = backdropPath;
         this.title = title;
@@ -104,7 +102,6 @@ public class Movie {
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.popularity = popularity;
-        this.userRating = userRating;
         this.idFromApi = idFromApi;
         this.video = video;
         this.usersFavourites = new ArrayList<User>();
@@ -190,13 +187,6 @@ public class Movie {
         this.popularity = popularity;
     }
 
-    public int getUserRating() {
-        return userRating;
-    }
-
-    public void setUserRating(int userRating) {
-        this.userRating = userRating;
-    }
 
     public int getIdFromApi() {
         return idFromApi;

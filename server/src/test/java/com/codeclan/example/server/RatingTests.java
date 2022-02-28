@@ -36,7 +36,7 @@ public class RatingTests {
                 "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
                 "Spider-Man: No Way Home", genres,
                 "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-                8.3, "2021-12-15", 9805.303, 7,
+                8.3, "2021-12-15", 9805.303,
                 634649, "Bh8NeyejykU");
 
         rating = new MovieUserRating(movie1, user1, 10);

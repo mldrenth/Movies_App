@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieUserRatingRepository extends JpaRepository<MovieUserRating, Long> {
+
+    MovieUserRating findRatingByMovieIdAndUserId(Long movieId, Long userId);
 }

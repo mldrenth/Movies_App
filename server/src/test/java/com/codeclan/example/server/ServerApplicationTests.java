@@ -74,4 +74,10 @@ class ServerApplicationTests {
 		User foundUser = userRepository.findUserByEmailAndPassword("fiona.g@gmail.com", "888");
 		assertEquals("Fiona", foundUser.getFirstName());
 	}
+
+	@Test
+	public void canFindRatingByMovieAndUserId(){
+		MovieUserRating foundRating = movieUserRatingRepository.findRatingByMovieIdAndUserId(1L, 1L);
+		assertEquals(10, foundRating.getRating());
+	}
 }

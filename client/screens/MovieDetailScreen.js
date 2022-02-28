@@ -140,7 +140,6 @@ const MovieDetailScreen = () => {
   }
 
 
-
   return (
     <View style={{ flex: 1, alignItems: 'center' }}>
       <ScrollView style={{ maxWidth: '100%' }}>
