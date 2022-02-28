@@ -20,7 +20,7 @@ public class Genre {
     private String name;
 
     @ManyToMany
-    @JsonIgnoreProperties({"genres"})
+    @JsonIgnoreProperties({"genres", "ratings", "movies", "usersFavourites", "usersWatchlist"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "movies_genres",

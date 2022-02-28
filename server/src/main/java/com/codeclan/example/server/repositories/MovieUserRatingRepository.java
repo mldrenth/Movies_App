@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MovieUserRatingRepository extends JpaRepository<MovieUserRating, Long> {
 
     MovieUserRating findRatingByMovieIdAndUserId(Long movieId, Long userId);
+    MovieUserRating findRatingByMovieIdFromApiAndUserId(int movieIdFromApi, Long userId);
 }

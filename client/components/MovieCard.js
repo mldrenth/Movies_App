@@ -45,7 +45,6 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
         
     }, [isFocused])
 
-    console.log(specificRating)
     
 
     const handleRemoveWatchlist = () => {
