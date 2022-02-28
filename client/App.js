@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect} from 'react';
+import { getUserData } from './services/UserServices';
 import { Text, View, useColorScheme, Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator, createMaterialTopTabNavigator } from '@react-navigation/bottom-tabs';
@@ -42,11 +44,19 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+      getUserData()
+      .then((userData) => {
+          setUser(userData)
+      })
+  }, [])
+
+
   const colorScheme = useColorScheme();
 
   return (
-    
-  
     <NavigationContainer theme={myTheme}>
     {/* <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
 
@@ -77,13 +87,12 @@ export default function App() {
         <Tab.Screen name="Search" component={SearchScreen}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Watchlist" component={WatchlistScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
         <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
-        <Tab.Screen name="User" component={UserScreen} options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
+        <Tab.Screen name="User" children={() => <UserScreen user={user} setUser={setUser}/>}  options={{ headerTitle: (props) => <HeaderTitle {...props} />, headerLeft: (props) => <HeaderLogo {...props} /> }}/>
       
         <Tab.Screen name="Login" component={LoginScreen}/>
 
       </Tab.Navigator>
       
-
 
     </NavigationContainer>
   );

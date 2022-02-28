@@ -7,17 +7,17 @@ import UserModal from '../components/UserModal';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 
-const UserScreen = () => {
+const UserScreen = ({user, setUser}) => {
 
-    const [user, setUser] = useState("");
-    const [editUser, setEditUser] = useState(false);
+    // const [user, setUser] = useState("");
+    // // const [editUser, setEditUser] = useState(false);
 
-    useEffect(() => {
-        getUserData()
-        .then((userData) => {
-            setUser(userData)
-        })
-    }, [])
+    // useEffect(() => {
+    //     getUserData()
+    //     .then((userData) => {
+    //         setUser(userData)
+    //     })
+    // }, [])
 
     const setUpdatedUser = (user) => {
         setUser(user)
