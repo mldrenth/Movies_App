@@ -96,7 +96,11 @@ const MovieDetailScreen = () => {
 
   useEffect(() => {
 
-    getVideoKey(id).then((moviekeys) => setYoutubeKey(moviekeys.results[0].key))
+    getVideoKey(id)
+    .then((moviekeys) => {
+     
+      if (moviekeys.results.length > 0){
+        setYoutubeKey(moviekeys.results[0].key)}})
   }, [isFocused])
 
   const handleSaveFavourites = () => {
