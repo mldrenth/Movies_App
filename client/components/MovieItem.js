@@ -23,17 +23,17 @@ const MovieItem = ({id, backdropPath, posterPath, genreIds, title, overview, vot
 }
 const styles = StyleSheet.create({
         item: {
-            padding: 0,
-            marginVertical: 8,
-            marginHorizontal: 0,
+            // padding: 0,
+            // marginVertical: 8,
+            // marginHorizontal: 0,
             
           },image: {
             flex: 1,
             resizeMode: 'contain',
             height: 100,
             width: 200,
-            borderRadius: 18
-        
+            borderRadius: 10,
+            marginLeft: 10,
           }
   
   });

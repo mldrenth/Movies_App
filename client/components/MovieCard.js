@@ -84,7 +84,7 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
                 
                 <View style={styles.rating}>
                     <Text style={{marginBottom:10, fontSize:17}}> 
-                        <FontAwesome name="imdb" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {voteAverage}    </Text>
+                        <FontAwesome name="imdb" size={24} color="#f5c517"/> <Text style={{color:"#fcfdfd"}}> {(voteAverage).toFixed(1) + " "} </Text>
                     </Text>
                 
                     {specificRating? 
