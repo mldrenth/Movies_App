@@ -8,7 +8,7 @@ import { useIsMounted } from './Mounthelper';
 import { getRatingByMovieAndUserId } from '../services/RatingServices';
 
 
-const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating, genres, video, removeMovieState, item}) => {
+const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, overview, voteAverage, releaseDate, popularity, userRating, genres, video, removeMovieState, item, onScreen}) => {
 
     const [userHasMovieWatchlist, setUserHasMovieWatchlist] = useState(false);
     const [userHasMovieFavourites, setUserHasMovieFavourites] = useState(false);
@@ -49,14 +49,28 @@ const MovieCard = ({id, idFromApi, backdropPath, posterPath, genreIds, title, ov
 
     const handleRemoveWatchlist = () => {
         removeMovieFromWatchlist(id)
-        removeMovieState(id)
+        if (onScreen === "Favourites") {
+            setUserHasMovieWatchlist(false)
+        }
+        if (onScreen === "Watchlist") {
+            removeMovieState(id)
+        }
+        
     }
 
     const handleRemoveFavourites = () => {
         removieMovieFromFavourites(id)
-        removeMovieState(id)
+        if (onScreen === "Favourites") {
+            removeMovieState(id)
+        }
+        if (onScreen === "Watchlist") {
+            setUserHasMovieFavourites(false)
+        }
+        
     
     }
+
+    
 
     return (
         <View style={{flexDirection: "row", marginRight:10, marginLeft:10, marginTop:10, backgroundColor: "#10161d", borderRadius: 10}}>

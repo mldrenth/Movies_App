@@ -9,6 +9,7 @@ import { useIsMounted } from '../components/Mounthelper';
 const FavouritesScreen = () => {
 
     const [moviesFavourites, setMoviesFavourites] = useState([]);
+    const [onFavouriteScreen, setOnFavouriteScreen] = useState("Favourites");
 
     const isFocused = useIsFocused();
     const isMounted = useIsMounted();
@@ -27,10 +28,11 @@ const FavouritesScreen = () => {
         })
     }, [isFocused])
 
+
     
     return (
         <View>
-            <MovieCardList removeMovieState={removeMovieState} movies={moviesFavourites}/>
+            <MovieCardList removeMovieState={removeMovieState} movies={moviesFavourites} onScreen={onFavouriteScreen}/>
         </View>
     )
     
