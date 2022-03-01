@@ -1,50 +1,28 @@
-Movies app project
 
-### Project title:
+### Movie Time 
 ***
 
 ### Description:
-React Native App that allows users to add movies they have seen and want to see to their profile and get recommendations
+React Native App developed in 10 days with two students during CodeClan's Professional Software Development course. It uses Expo to build our app and "The Movie Database" to fetch movie data from. Our backend uses Java/Spring Boot
 
 ### Why:
 Learning React Native would give us a wider knowledge of frameworks, also it gives us an opportunity to start working on mobile applications.
 
-### MVP Acceptance Criteria:
-* View a list of popular movies
-* Search for a movie by name
-* View movie information
-* Add/remove a movie to/from my watchlist
-* Add/remove a movie to/from my favourites
-* View/edit user information
-
-### Potential Extensions:
-* User to be able to create an account
-* User to be able to login / logout
-* Display movie recommendations
-* Ability to rate movies
-* Ability to add/remove friends
-* View my fiend's favourites
-
-### Additional Extensions:
-* Include TV shows
-* TV show has seasons and episodes
-
-### Risks:
-Learning React Native framework might take time and add extra complexity.
-
-### Exclusions:
-Does not need to run on a web browser
-
-### Prerequisites:
-Setting up a React Native Expo
-
-### Instructor Sign Off:
-### Sign Off Date:
+### Screenshots:
 
 
 
-On backend side:
-### `run java application`
-
-On client side:
-### `npm start`
+### How to install:
+Please install the ExpoGo app on your own device.
+1. Follow the steps on https://developers.themoviedb.org/3/getting-started/introduction to get your own API key
+2. Fork the repository
+3. `$ npm install --global expo-cli ` to install expo via the terminal
+4. `npm install` in the terminal from inside '/client' for dependencies
+5. Open /server in IntelliJ
+6. Run ServerApplication in IntelliJ
+7. Open /client in VSCode
+8. In /services create a new file "local_ip.js" and write `export const ip = "{Your own IPv4 Address}";` (Needed so your phone knows to connect to your computer's localhost)
+9. In /services create a new file "apikey.js" and write `export const apikey = "{Your own Api Key}";`
+10. From /client in the terminal `expo start`
+11. Choose your own app to scan the code or use the iOS simulator
+12. Use fiona.g@gmail.com and 888 for the login details
