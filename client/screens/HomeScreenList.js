@@ -93,8 +93,10 @@ const styles = StyleSheet.create({
     },
     text: {
       color: "#f5c517",
-      fontSize: 16,
+      fontSize: 20,
       paddingLeft: 10,
+      paddingTop: 15,
+      paddingBottom: 7,
       fontWeight:"bold"
   }
   });

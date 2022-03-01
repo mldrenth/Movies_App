@@ -31,7 +31,7 @@ const LoginScreen = ({handleLogin}) => {
                     style={styles.textInput}
                     placeholder="Email"
                     placeholderTextColor="grey"
-                    onChangeText={(email) => setEmail(email)}
+                    onChangeText={(email) => setEmail(email.toLowerCase())}
                 />
             </View>
 

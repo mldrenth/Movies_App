@@ -97,7 +97,7 @@ const MovieDetailScreen = () => {
   useEffect(() => {
 
     getVideoKey(id).then((moviekeys) => setYoutubeKey(moviekeys.results[0].key))
-  }, [])
+  }, [isFocused])
 
   const handleSaveFavourites = () => {
     addMovieToFavourites({
@@ -242,7 +242,7 @@ const MovieDetailScreen = () => {
         </View>
         {youtubeKey ? <View style={{ flex: 1 }}>
           <Text style={{ color: "#f5c517" }}>Trailer</Text>
-          <YoutubePlayer height={250}
+          <YoutubePlayer height={220}
             play={playing}
             videoId={youtubeKey}
             onChangeState={onStateChange}></YoutubePlayer>
