@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Button, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Button, TextInput, Modal, Pressable } from 'react-native';
+import Slider from '@react-native-community/slider';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,6 +25,7 @@ const MovieDetailScreen = () => {
   const [userMoviesFavourites, setUserMoviesFavourites] = useState([]);
   const [movieGenres, setMovieGenres] = useState([]);
   const backdropUrl = { uri: "https://image.tmdb.org/t/p/w500/" + (backdropPath) }
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [playing, setPlaying] = useState(false);
   const [userHasMovieWatchlist, setUserHasMovieWatchlist] = useState(false);
@@ -135,17 +137,17 @@ const MovieDetailScreen = () => {
 
   const handleRating = () => {
     addNewRating({
-      movie:{
-      posterPath: posterPath,
-      backdropPath: backdropPath,
-      title: title,
-      genres: movieGenres,
-      overview: overview,
-      voteAverage: voteAverage,
-      releaseDate: releaseDate,
-      popularity: popularity,
-      idFromApi: id,
-      video: youtubeKey
+      movie: {
+        posterPath: posterPath,
+        backdropPath: backdropPath,
+        title: title,
+        genres: movieGenres,
+        overview: overview,
+        voteAverage: voteAverage,
+        releaseDate: releaseDate,
+        popularity: popularity,
+        idFromApi: id,
+        video: youtubeKey
       },
       user: {
         id: currentUser.id,
@@ -158,6 +160,7 @@ const MovieDetailScreen = () => {
       },
       rating: rating
     })
+    setModalVisible(!modalVisible)
 
   }
 
@@ -171,6 +174,8 @@ const MovieDetailScreen = () => {
     removieMovieFromFavourites(idFromDb)
     setUserHasMovieFavourites(false)
   }
+
+
 
 
   return (
@@ -194,15 +199,46 @@ const MovieDetailScreen = () => {
             <TouchableHighlight onPress={handleSaveFavourites}>
               <Ionicons name="heart" size={32} color="#8a8d98" />
             </TouchableHighlight>}
-            
+            <Pressable  onPress={() => setModalVisible(true)}>
+            <Ionicons name="star" size={32} color="#8a8d98" />
+            </Pressable>
+
 
         </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+              <Text style={{ color: "#f5c517", alignSelf: 'center' }}>{rating}</Text>
         <View style={styles.container}>
-        <Text style={{ color: "#f5c517" }}>Leave a Rating</Text>
-        <TextInput style={styles.input} keyboardType={'number-pad'} maxLength={1} onChangeText={setRating}></TextInput>
-            <TouchableHighlight onPress={handleRating}>
-              <Ionicons name="star" size={32} color="#8a8d98" />
-            </TouchableHighlight>
+          <Slider minimumValue={0}
+            style={{ width: 200, height: 40 }}
+            maximumValue={10}
+            value={rating}
+            minimumTrackTintColor="#f5c517"
+            maximumTrackTintColor="#8a8d98"
+            onValueChange={setRating}
+            step={1}
+            thumbTintColor="#f5c517"></Slider>
+          <TouchableHighlight style={[styles.buttonOpen, styles.button]} onPress={handleRating}>
+            <Text style={styles.textStyle} >Leave a Rating</Text>
+          </TouchableHighlight>
+        </View>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+
         </View>
         {youtubeKey ? <View style={{ flex: 1 }}>
           <Text style={{ color: "#f5c517" }}>Trailer</Text>
@@ -272,6 +308,47 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: 'center',
     alignItems: 'center'
-  }
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: '#151D30',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#f5c517',
+  },
+  buttonClose: {
+    backgroundColor: '#f5c517',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
 
 });
