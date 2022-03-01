@@ -3,7 +3,7 @@
 ***
 
 ### Description:
-React Native App developed in 10 days with two students during CodeClan's Professional Software Development course. It uses Expo to build our app and "The Movie Database" to fetch movie data from. Our backend uses Java/Spring Boot
+React Native App developed in 10 days with two students during CodeClan's Professional Software Development course. With this, users will get multiple lists of movies displayed they can add on to their watchlist or mark them as favourites and get recommendations based upon these choices. It uses Expo to build our app and "The Movie Database" to fetch movie data from. Our backend uses Java/Spring Boot.
 
 ### Why:
 Learning React Native would give us a wider knowledge of frameworks, also it gives us an opportunity to start working on mobile applications.
