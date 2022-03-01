@@ -9,6 +9,7 @@ const WatchlistScreen = () => {
 
     const [moviesWatchlist, setMoviesWatchlist] = useState([]);
     const isFocused = useIsFocused();
+    const [onWatchlistScreen, setOnWatchlistScreen] = useState("Watchlist");
 
     const removeMovieState = (idToDelete) => {
         const newMoviesWatchlist = [...moviesWatchlist]
@@ -25,7 +26,7 @@ const WatchlistScreen = () => {
     
     return (
         <View>
-            <MovieCardList removeMovieState={removeMovieState} movies={moviesWatchlist}/>
+            <MovieCardList removeMovieState={removeMovieState} movies={moviesWatchlist} onScreen={onWatchlistScreen}/>
         </View>
 
     )

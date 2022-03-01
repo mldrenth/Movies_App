@@ -3,7 +3,7 @@ import { FlatList, Text, View } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 import MovieCard from './MovieCard';
 
-const MovieCardList = ({movies, removeMovieState}) => {
+const MovieCardList = ({movies, removeMovieState, onScreen}) => {
 
     const renderItem = ({item}) => (<MovieCard 
         id={item.id}
@@ -20,12 +20,13 @@ const MovieCardList = ({movies, removeMovieState}) => {
         genres={item.genres}
         video={item.video}
         item={item}
-        removeMovieState={removeMovieState}/>)
+        removeMovieState={removeMovieState}
+        onScreen={onScreen}/>)
 
        
     
     return (
-        <FlatList removeMovieState={removeMovieState} data={movies} renderItem={renderItem}></FlatList>
+        <FlatList removeMovieState={removeMovieState} data={movies} renderItem={renderItem} onScreen={onScreen}></FlatList>
     )
 
 }
