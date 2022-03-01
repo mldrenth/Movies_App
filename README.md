@@ -9,7 +9,10 @@ React Native App developed in 10 days with two students during CodeClan's Profes
 Learning React Native would give us a wider knowledge of frameworks, also it gives us an opportunity to start working on mobile applications.
 
 ### Screenshots:
-![App Screenshot](/client/assets/screen1.png?raw=true) ![App Screenshot](/client/assets/screen2.png?raw=true) ![App Screenshot](/client/assets/screen3.png?raw=true) ![App Screenshot](/client/assets/screen4.png?raw=true)
+
+<img src="https://user-images.githubusercontent.com/84736627/156210903-bc2ececa-cd4e-4cf4-8621-18f00ebb5cc9.png" width="20%" height="20%"><img src="https://user-images.githubusercontent.com/84736627/156211557-dd19aeb9-870e-407d-ab97-4124f56d19f5.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/84736627/156211579-a5b59bb8-25e4-4e12-a66e-82a2df81e8f0.png" width="20%" height="20%"><img src="https://user-images.githubusercontent.com/84736627/156211587-001612db-77c9-4f88-8466-b159ef60542d.png" width="20%" height="20%">
+
 
 
 
