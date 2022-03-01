@@ -16,9 +16,7 @@ const MovieItem = ({id, backdropPath, posterPath, genreIds, title, overview, vot
             
             </Image>
             </TouchableHighlight>
-           
-           
-        
+
     )
 }
 const styles = StyleSheet.create({
