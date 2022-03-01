@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         height: 300,
         width: 200,
-        borderBottomLeftRadius: 7,
-        borderTopLeftRadius: 7
+        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 10
     },
     rating: {
         flexDirection: 'row'
