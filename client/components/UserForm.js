@@ -129,7 +129,7 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onChangeText={onChange}
                     value={value}
                     secureTextEntry={true}
-                    placeholder="Recent Password"
+                    placeholder="Password"
                     placeholderTextColor="grey"
                 />
                 )}
