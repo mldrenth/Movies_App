@@ -27,7 +27,7 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
                 >
                 <View style={styles.centeredView}>
                   <View style={styles.modalView}>
-                    <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:16 }}>Edit User details</Text>
+                    <Text style={{ color:"#f5c517", paddingBottom:10, fontWeight:"bold", fontSize:20 }}>Edit User details</Text>
                 
                     <UserForm user={user} setUpdatedUser={setUpdatedUser} closeModal={closeModal}/>
                 

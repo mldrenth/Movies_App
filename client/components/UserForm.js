@@ -33,11 +33,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    placeholder="Username"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="username"
             />
-            {errors.userName && <Text>This is required.</Text>}
+            {errors.userName && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <Controller
                 control={control}
@@ -50,11 +52,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    placeholder="First Name"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="firstName"
             />
-            {errors.firstName && <Text>This is required.</Text>}
+            {errors.firstName && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <Controller
                 control={control}
@@ -67,11 +71,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    placeholder="Last Name"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="lastName"
             />
-            {errors.lastName && <Text>This is required.</Text>}
+            {errors.lastName && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <Controller
                 control={control}
@@ -84,11 +90,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    placeholder="Phone Number"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="phoneNumber"
             />
-            {errors.phoneNumber && <Text>This is required.</Text>}
+            {errors.phoneNumber && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <Controller
                 control={control}
@@ -101,11 +109,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    placeholder="Email Address"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="email"
             />
-            {errors.email && <Text>This is required.</Text>}
+            {errors.email && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <Controller
                 control={control}
@@ -119,11 +129,13 @@ const UserForm = ({user, setUpdatedUser, closeModal}) => {
                     onChangeText={onChange}
                     value={value}
                     secureTextEntry={true}
+                    placeholder="Recent Password"
+                    placeholderTextColor="grey"
                 />
                 )}
                 name="password"
             />
-            {errors.password && <Text>This is required.</Text>}
+            {errors.password && <Text style={{ color:"#f5c517" }}>This is required.</Text>}
 
             <View style={styles.button_container}>
                 <AntDesign style={{paddingRight:10}} name="checkcircleo" size={30} color="#f5c517" onPress={handleSubmit(onSubmit)}/>
