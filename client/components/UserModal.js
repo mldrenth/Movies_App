@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
 import UserForm from '../components/UserForm';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
@@ -35,7 +35,6 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
                 </View>
             </Modal>
 
-            {/* <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} /> */}
             
             <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <MaterialCommunityIcons name="account-edit-outline" size={32} color="#f5c517" />
@@ -48,7 +47,6 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
               </View>
             </TouchableOpacity>
             
-            {/* <FontAwesome name="power-off" size={30} color="#f5c517" onPress={() => handleLogout()}/> */}
 
         </View>
     );

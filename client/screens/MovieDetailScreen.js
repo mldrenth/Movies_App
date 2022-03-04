@@ -1,17 +1,16 @@
-import { React, useState, useEffect, useRef, useCallback } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Button, TextInput, Modal, Pressable } from 'react-native';
+import { React, useState, useEffect, useCallback } from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableHighlight, Modal, Pressable } from 'react-native';
 import Slider from '@react-native-community/slider';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getVideoKey } from '../services/MovieApiServices';
-import { addMovie } from '../services/MovieServices';
 import { addMovieToFavourites, addMovieToWatchlist, removeMovieFromWatchlist, removieMovieFromFavourites } from '../services/UserServices';
 import { useIsFocused } from "@react-navigation/native";
 import { getUserData } from '../services/UserServices';
 import { getAllGenres } from '../services/GenreServices';
 import { addNewRating } from '../services/RatingServices';
+import styles from './MovieDetailScreenStyle';
 
 
 const MovieDetailScreen = () => {
@@ -77,8 +76,8 @@ const MovieDetailScreen = () => {
 
 
   const genreBadges = movieGenres.map((genre) => {
-    return (<View key={genre.id} style={{ borderRadius: 10, backgroundColor: '#151D30', padding: 5, marginBottom: 5 }}>
-      <Text style={{ color: "#b5b7b9" }} key={genre.id}>{genre.name}</Text></View>)
+    return (<View key={genre.id} style={styles.genreBadgesBackground}>
+      <Text style={styles.genreBadgesText} key={genre.id}>{genre.name}</Text></View>)
 
   })
 
@@ -90,17 +89,16 @@ const MovieDetailScreen = () => {
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
 
   useEffect(() => {
 
     getVideoKey(id)
-    .then((moviekeys) => {
-     
-      if (moviekeys.results.length > 0){
-        setYoutubeKey(moviekeys.results[0].key)}})
+      .then((moviekeys) => {
+
+        if (moviekeys.results.length > 0) {
+          setYoutubeKey(moviekeys.results[0].key)
+        }
+      })
   }, [isFocused])
 
   const handleSaveFavourites = () => {
@@ -186,8 +184,8 @@ const MovieDetailScreen = () => {
     <View style={{ flex: 1, alignItems: 'center' }}>
       <ScrollView style={{ maxWidth: '100%' }}>
         <Image source={backdropUrl} style={styles.backdrop}></Image>
-        <Text style={{ fontSize: 20, color: "#b5b7b9", fontWeight: "bold" }}>{title}</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+        <Text style={styles.movieTitle}>{title}</Text>
+        <View style={styles.buttonContainer}>
           {userHasMovieWatchlist ?
             <TouchableHighlight onPress={handleRemoveWatchlist}>
               <Ionicons name="bookmark" size={32} color="#f5c517" />
@@ -203,9 +201,9 @@ const MovieDetailScreen = () => {
             <TouchableHighlight onPress={handleSaveFavourites}>
               <Ionicons name="heart" size={32} color="#8a8d98" />
             </TouchableHighlight>}
-            <Pressable  onPress={() => setModalVisible(true)}>
+          <Pressable onPress={() => setModalVisible(true)}>
             <Ionicons name="star" size={32} color="#8a8d98" />
-            </Pressable>
+          </Pressable>
 
 
         </View>
@@ -219,21 +217,21 @@ const MovieDetailScreen = () => {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Text style={{ color: "#f5c517", alignSelf: 'center' }}>{rating}</Text>
-        <View style={styles.container}>
-          <Slider minimumValue={0}
-            style={{ width: 200, height: 40 }}
-            maximumValue={10}
-            value={rating}
-            minimumTrackTintColor="#f5c517"
-            maximumTrackTintColor="#8a8d98"
-            onValueChange={setRating}
-            step={1}
-            thumbTintColor="#f5c517"></Slider>
-          <TouchableHighlight style={[styles.buttonOpen, styles.button]} onPress={handleRating}>
-            <Text style={styles.textStyle} >Leave a Rating</Text>
-          </TouchableHighlight>
-        </View>
+                <Text style={{ color: "#f5c517", alignSelf: 'center' }}>{rating}</Text>
+                <View style={styles.container}>
+                  <Slider minimumValue={0}
+                    style={{ width: 200, height: 40 }}
+                    maximumValue={10}
+                    value={rating}
+                    minimumTrackTintColor="#f5c517"
+                    maximumTrackTintColor="#8a8d98"
+                    onValueChange={setRating}
+                    step={1}
+                    thumbTintColor="#f5c517"></Slider>
+                  <TouchableHighlight style={[styles.buttonOpen, styles.button]} onPress={handleRating}>
+                    <Text style={styles.textStyle} >Leave a Rating</Text>
+                  </TouchableHighlight>
+                </View>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}>
@@ -251,7 +249,7 @@ const MovieDetailScreen = () => {
             videoId={youtubeKey}
             onChangeState={onStateChange}></YoutubePlayer>
         </View> : null}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 5 }}>
+        <View style={styles.genreBadgesContainer}>
           {genreBadges}
         </View>
         <Text style={{ color: "#f5c517" }}>Overview</Text>
@@ -266,93 +264,3 @@ const MovieDetailScreen = () => {
 
 export default MovieDetailScreen;
 
-const styles = StyleSheet.create({
-  item: {
-    padding: 0,
-    marginVertical: 8,
-    marginHorizontal: 0,
-
-
-  }, image: {
-
-    resizeMode: 'contain',
-    height: 100,
-    width: 200
-
-  }, backdrop: {
-    resizeMode: 'cover',
-    height: 200,
-    width: 400,
-
-  }, video: {
-    alignSelf: 'center',
-    width: 350,
-    height: 220,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    backgroundColor: '#151D30',
-    width: '10%',
-    alignSelf: 'center',
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    borderColor: '#f5c517',
-    color: '#b5b7b9',
-    marginRight: 10,
-    marginLeft: 20
-  },
-  container: {
-    marginTop: 10,
-    flexDirection: 'row',
-    padding: 10,
-    alignSelf: 'center',
-    alignItems: 'center'
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: '#151D30',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#f5c517',
-  },
-  buttonClose: {
-    backgroundColor: '#f5c517',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-
-});

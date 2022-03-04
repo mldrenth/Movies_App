@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import {Text, View, Image, StyleSheet} from 'react-native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { FlatList } from 'react-native-web';
 import { getUserData, removeMovieFromWatchlist, removieMovieFromFavourites } from '../services/UserServices';
 import { useIsFocused } from "@react-navigation/native";
 import { useIsMounted } from './Mounthelper';

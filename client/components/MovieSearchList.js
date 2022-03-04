@@ -1,6 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import MovieItem from './MovieItem';
+import { FlatList } from 'react-native';
 import MovieSearchCard from './MovieSearchCard';
 
 const MovieSearchList = ({movies}) => {

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, Alert, Pressable } from 'react-native';
+import { Text, View, StyleSheet, TextInput} from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
-import Constants from 'expo-constants';
 import { updateUser } from '../services/UserServices';
 import { AntDesign } from '@expo/vector-icons'; 
 

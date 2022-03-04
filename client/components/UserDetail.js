@@ -1,6 +1,5 @@
-import {React, useState, useEffect} from 'react';
-import { getUserData, updateUser } from '../services/UserServices';
-import {View, Text, FlatList, StyleSheet} from 'react-native'
+import {React} from 'react';
+import {View, Text, StyleSheet} from 'react-native'
 
 
 const UserDetail = ({user}) => {
