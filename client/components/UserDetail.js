@@ -1,5 +1,6 @@
 import {React} from 'react';
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text} from 'react-native'
+import styles from './UserDetailStyle';
 
 
 const UserDetail = ({user}) => {
@@ -25,19 +26,6 @@ const UserDetail = ({user}) => {
     ) 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        paddingTop: 30,
-        paddingLeft: 30,
-        paddingBottom: 10,
-        justifyContent: 'center',
-        fontWeight:"bold"
-    },
-    text: {
-        color: "#b5b7b9",
-        fontSize: 16,
-        lineHeight: 28
-    }
-  });
+
 
 export default UserDetail;
