@@ -1,6 +1,6 @@
-import {React, useState, useEffect} from 'react';
-import { getUserData, updateUser } from '../services/UserServices';
-import {View, Text, FlatList, StyleSheet} from 'react-native'
+import {React} from 'react';
+import {View, Text} from 'react-native'
+import styles from './UserDetailStyle';
 
 
 const UserDetail = ({user}) => {
@@ -26,19 +26,6 @@ const UserDetail = ({user}) => {
     ) 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        paddingTop: 30,
-        paddingLeft: 30,
-        paddingBottom: 10,
-        justifyContent: 'center',
-        fontWeight:"bold"
-    },
-    text: {
-        color: "#b5b7b9",
-        fontSize: 16,
-        lineHeight: 28
-    }
-  });
+
 
 export default UserDetail;

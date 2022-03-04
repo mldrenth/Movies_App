@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import { getUserData } from '../services/UserServices';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
+import { View} from 'react-native';
 import MovieCardList from '../components/MovieCardList';
 import { useIsFocused } from "@react-navigation/native";
 import { useIsMounted } from '../components/Mounthelper';

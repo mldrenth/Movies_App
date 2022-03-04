@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons'; 
 import UserForm from '../components/UserForm';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import styles from "./UserModalStyle";
 
 
 const UserModal = ({user, setUpdatedUser, handleLogout}) => {
@@ -35,7 +36,6 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
                 </View>
             </Modal>
 
-            {/* <FontAwesome name="edit" size={30} color="#f5c517" onPress={() => setModalVisible(true)} /> */}
             
             <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <MaterialCommunityIcons name="account-edit-outline" size={32} color="#f5c517" />
@@ -48,40 +48,11 @@ const UserModal = ({user, setUpdatedUser, handleLogout}) => {
               </View>
             </TouchableOpacity>
             
-            {/* <FontAwesome name="power-off" size={30} color="#f5c517" onPress={() => handleLogout()}/> */}
 
         </View>
     );
   };
 
   
-  const styles = StyleSheet.create({
-    container: {
-      marginLeft: 30
-    },
-    centeredView: {
-      backgroundColor: 'rgba(21, 29, 48, 0.8)',
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 22
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: "#060d17",
-      borderRadius: 7,
-      borderWidth: 1,
-      borderColor: "#f5c517",
-      padding: 35,
-      alignItems: "center",
-      elevation: 5
-    },
-    button: {
-      marginTop: 200,
-      marginRight: 30,
-      flexDirection: 'row',
-      justifyContent: 'center',
-    }
-  });
 
 export default UserModal;

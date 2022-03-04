@@ -1,6 +1,6 @@
-import {React, useState, useEffect} from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { useIsFocused } from "@react-navigation/native";
+import {React} from 'react';
+import { FlatList} from 'react-native';
+
 import MovieCard from './MovieCard';
 
 const MovieCardList = ({movies, removeMovieState, onScreen}) => {
